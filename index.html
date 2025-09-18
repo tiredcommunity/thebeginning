@@ -3159,20 +3159,39 @@
         animationFrame = window.requestAnimationFrame(step);
       };
 
+      const startLoop = () => {
+        if (animationFrame) {
+          window.cancelAnimationFrame(animationFrame);
+        }
+        animationFrame = window.requestAnimationFrame(step);
+      };
+
+      const startGame = () => {
+        resetGame();
+        startLoop();
+      };
+
+      const stopGame = () => {
+        if (animationFrame) {
+          window.cancelAnimationFrame(animationFrame);
+          animationFrame = null;
+        }
+      };
+
+      if (mobileQuery.matches) {
+        startGame();
+      } else {
+        resetGame();
+        stopGame();
+      }
+
       mobileQuery.addEventListener?.('change', (event) => {
-        if (!event.matches) {
-          if (animationFrame) {
-            window.cancelAnimationFrame(animationFrame);
-            animationFrame = null;
-          }
-        } else if (!animationFrame) {
-          resetGame();
-          step();
+        if (event.matches) {
+          startGame();
+        } else {
+          stopGame();
         }
       });
-
-      resetGame();
-      step();
     }
 
   </script>
