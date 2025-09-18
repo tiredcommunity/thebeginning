@@ -1754,7 +1754,8 @@
     .mobile-alpha,
     .mobile-marquee,
     .mobile-proof,
-    .mobile-cta {
+    .mobile-cta,
+    .mobile-flappy {
       display: none;
     }
     .sidebar-list {
@@ -1966,6 +1967,59 @@
         border: 1px solid rgba(255,255,255,0.16);
         background: linear-gradient(135deg, rgba(23,23,32,0.92), rgba(12,12,20,0.88));
         box-shadow: 0 18px 38px rgba(0,0,0,0.45);
+      }
+      .mobile-flappy {
+        display: grid;
+        gap: 18px;
+      }
+      .flappy-card {
+        border-radius: 24px;
+        padding: 18px 18px 22px;
+        background: linear-gradient(145deg, rgba(24,24,32,0.95), rgba(12,12,18,0.92));
+        border: 1px solid rgba(255,255,255,0.14);
+        box-shadow: 0 30px 58px rgba(0,0,0,0.5);
+        display: grid;
+        gap: 12px;
+      }
+      .flappy-stage {
+        position: relative;
+        width: min(100%, 360px);
+        margin: 0 auto;
+      }
+      .flappy-stage canvas {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 18px;
+        background: #0f0f12;
+        border: 1px solid rgba(255,255,255,0.08);
+      }
+      .flappy-message {
+        position: absolute;
+        inset: 0;
+        display: grid;
+        align-content: center;
+        justify-items: center;
+        gap: 6px;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+        color: rgba(245,245,247,0.78);
+        pointer-events: none;
+        font-size: 11px;
+        text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+      }
+      .flappy-score {
+        font-size: 28px;
+        font-weight: 800;
+        color: var(--primary);
+        letter-spacing: 0.12em;
+      }
+      .flappy-instruction {
+        font-size: 12px;
+      }
+      .flappy-callout {
+        font-size: 12px;
+        color: rgba(169,112,255,0.85);
       }
       .mobile-marquee::before {
         content: "";
@@ -2568,6 +2622,12 @@
       .mobile-hero {
         padding: 24px 20px 28px;
       }
+      .flappy-stage {
+        width: min(100%, 320px);
+      }
+      .flappy-score {
+        font-size: 24px;
+      }
       .mobile-hero-headline {
         font-size: 24px;
       }
@@ -2773,6 +2833,20 @@
           </dl>
         </div>
       </section>
+
+  <section class="mobile-flappy" aria-label="TIRED flappy grind">
+    <div class="flappy-card">
+      <div class="flappy-stage">
+        <canvas width="320" height="420" aria-label="TIRED flappy canvas"></canvas>
+        <div class="flappy-message" aria-live="polite">
+          <span class="flappy-score">0</span>
+          <span class="flappy-instruction">Tap to flap.</span>
+          <span class="flappy-callout">OPEN DESKTOP MF.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
 
       <section class="mobile-marquee" aria-label="TIRED momentum ticker">
         <div class="marquee-track">
@@ -3783,6 +3857,184 @@
       chatReplyIndex = (chatReplyIndex + 1) % chatReplies.length;
       window.setTimeout(() => appendChatMessage(reply, 'bot'), 350);
     });
+
+    const flappyStage = document.querySelector('.mobile-flappy .flappy-stage');
+    if (flappyStage) {
+      const mobileQuery = window.matchMedia('(max-width: 640px)');
+      if (!mobileQuery.matches) {
+        return;
+      }
+      const canvas = flappyStage.querySelector('canvas');
+      const scoreEl = flappyStage.querySelector('.flappy-score');
+      const instructionEl = flappyStage.querySelector('.flappy-instruction');
+      const calloutEl = flappyStage.querySelector('.flappy-callout');
+      const ctx = canvas.getContext('2d');
+      const WIDTH = canvas.width;
+      const HEIGHT = canvas.height;
+      const FLOOR = HEIGHT - 28;
+      const primaryValue = (getComputedStyle(document.documentElement).getPropertyValue('--primary') || '#a970ff').trim() || '#a970ff';
+      const birdImg = new Image();
+      let birdReady = false;
+      birdImg.src = 'logo.png';
+      birdImg.onload = () => { birdReady = true; };
+
+      let animationFrame;
+      let bird;
+      let pipes;
+      let frame;
+      let score;
+      let started;
+      let gameOver;
+
+      const gravity = 0.28;
+      const jumpVelocity = -5.1;
+      const pipeGap = 120;
+      const pipeWidth = 48;
+      const pipeInterval = 90;
+      const pipeSpeed = 2.2;
+
+      const resetGame = () => {
+        bird = { x: WIDTH * 0.25, y: HEIGHT * 0.5, vy: 0, size: 16 };
+        pipes = [];
+        frame = 0;
+        score = 0;
+        started = false;
+        gameOver = false;
+        if (scoreEl) scoreEl.textContent = '0';
+        if (instructionEl) instructionEl.textContent = 'Tap to flap.';
+        if (calloutEl) calloutEl.textContent = 'OPEN DESKTOP MF.';
+      };
+
+      const spawnPipe = () => {
+        const minTop = 40;
+        const maxTop = HEIGHT - pipeGap - 80;
+        const top = Math.random() * (maxTop - minTop) + minTop;
+        pipes.push({ x: WIDTH, top, passed: false });
+      };
+
+      const setGameOver = () => {
+        if (gameOver) return;
+        gameOver = true;
+        if (instructionEl) instructionEl.textContent = 'Bonked. Tap to restart.';
+      };
+
+      const flap = () => {
+        if (gameOver) {
+          resetGame();
+          return;
+        }
+        started = true;
+        bird.vy = jumpVelocity;
+        if (instructionEl) instructionEl.textContent = 'Keep tapping.';
+      };
+
+      const handleInput = (event) => {
+        event?.preventDefault?.();
+        flap();
+      };
+
+      canvas.addEventListener('pointerdown', handleInput);
+      canvas.addEventListener('touchstart', handleInput, { passive: true });
+      document.addEventListener('keydown', (event) => {
+        if (event.code === 'Space') {
+          event.preventDefault();
+          handleInput(event);
+        }
+      });
+
+      const drawBird = () => {
+        ctx.save();
+        ctx.translate(bird.x, bird.y);
+        ctx.rotate(Math.min(bird.vy / 6, 0.5));
+        if (birdReady) {
+          const size = bird.size * 2.2;
+          ctx.drawImage(birdImg, -size / 2, -size / 2, size, size);
+        } else {
+          ctx.fillStyle = primaryValue;
+          ctx.beginPath();
+          ctx.arc(0, 0, bird.size, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      };
+
+      const drawPipes = () => {
+        ctx.fillStyle = primaryValue;
+        pipes.forEach((pipe) => {
+          ctx.fillRect(pipe.x, 0, pipeWidth, pipe.top);
+          ctx.fillRect(pipe.x, pipe.top + pipeGap, pipeWidth, HEIGHT);
+        });
+      };
+
+      const update = () => {
+        frame += 1;
+        ctx.fillStyle = '#09090f';
+        ctx.fillRect(0, 0, WIDTH, HEIGHT);
+
+        if (!started) {
+          bird.y += Math.sin(frame / 14) * 0.6;
+        } else if (!gameOver) {
+          bird.vy += gravity;
+          bird.y += bird.vy;
+          if (frame % pipeInterval === 0) spawnPipe();
+        }
+
+        pipes = pipes.filter((pipe) => pipe.x + pipeWidth > -10);
+        pipes.forEach((pipe) => {
+          if (started && !gameOver) {
+            pipe.x -= pipeSpeed;
+          }
+          if (!pipe.passed && pipe.x + pipeWidth < bird.x - bird.size) {
+            pipe.passed = true;
+            score += 1;
+            if (scoreEl) scoreEl.textContent = String(score);
+          }
+          if (!gameOver && pipe.x < bird.x + bird.size && pipe.x + pipeWidth > bird.x - bird.size) {
+            if (bird.y - bird.size < pipe.top || bird.y + bird.size > pipe.top + pipeGap) {
+              setGameOver();
+            }
+          }
+        });
+
+        drawPipes();
+        drawBird();
+
+        ctx.fillStyle = 'rgba(255,255,255,0.05)';
+        ctx.fillRect(0, FLOOR, WIDTH, HEIGHT - FLOOR);
+        ctx.fillStyle = 'rgba(255,255,255,0.2)';
+        ctx.fillRect(0, FLOOR, WIDTH, 2);
+
+        if (bird.y + bird.size >= FLOOR) {
+          bird.y = FLOOR - bird.size;
+          setGameOver();
+        } else if (bird.y - bird.size <= 0) {
+          bird.y = bird.size;
+          setGameOver();
+        }
+
+      };
+
+      const step = () => {
+        update();
+        animationFrame = window.requestAnimationFrame(step);
+      };
+
+      mobileQuery.addEventListener?.('change', (event) => {
+        if (!event.matches) {
+          if (animationFrame) {
+            window.cancelAnimationFrame(animationFrame);
+            animationFrame = null;
+          }
+        } else if (!animationFrame) {
+          resetGame();
+          step();
+        }
+      });
+
+      resetGame();
+      step();
+    }
+
   </script>
   <script>
 
