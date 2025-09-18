@@ -1754,76 +1754,125 @@
       gap: 10px;
     }
 
-    .mobile-flappy {
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: var(--bg);
+      color: var(--text);
+      font-family: inherit;
+      -webkit-font-smoothing: antialiased;
+    }
+    .mobile-only { display: none; }
+
+    .mobile-flappy-wrapper {
       display: none;
     }
-    .flappy-card {
-      background: linear-gradient(150deg, rgba(24,24,34,0.96), rgba(12,12,18,0.9));
-      border: 1px solid rgba(255,255,255,0.16);
-      border-radius: 24px;
-      padding: clamp(20px, 5vw, 26px);
-      box-shadow: 0 32px 64px rgba(0,0,0,0.55);
-      display: grid;
-      gap: 18px;
-      align-items: center;
-      justify-items: center;
-      text-align: center;
+
+    @media (max-width: 640px) {
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 24px 16px 60px;
+        gap: 18px;
+        background: radial-gradient(circle at 20% -10%, rgba(169,112,255,0.18), transparent 55%), var(--bg);
+        overflow: hidden;
+      }
+      header.top-nav,
+      .app-shell,
+      .community-bar,
+      .chat-widget,
+      .lockin-overlay,
+      .meme-toast {
+        display: none !important;
+      }
+      .mobile-flappy-wrapper {
+        display: grid;
+        justify-items: center;
+        gap: 18px;
+        width: min(380px, 100%);
+      }
+      .mobile-flappy {
+        display: block;
+        width: 100%;
+      }
+      .flappy-card {
+        background: linear-gradient(150deg, rgba(24,24,34,0.96), rgba(12,12,18,0.9));
+        border: 1px solid rgba(255,255,255,0.16);
+        border-radius: 24px;
+        padding: 20px 22px 24px;
+        box-shadow: 0 32px 64px rgba(0,0,0,0.55);
+        display: grid;
+        gap: 18px;
+        align-items: center;
+        justify-items: center;
+        text-align: center;
+      }
+      .flappy-title {
+        margin: 0;
+        font-size: 18px;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: rgba(245,245,247,0.78);
+      }
+      .flappy-stage {
+        position: relative;
+        width: min(360px, 100%);
+        border-radius: 20px;
+        overflow: hidden;
+        border: 1px solid rgba(255,255,255,0.12);
+        box-shadow: inset 0 0 26px rgba(0,0,0,0.5);
+        aspect-ratio: 8 / 11;
+        background: linear-gradient(180deg, rgba(10,10,16,1) 0%, rgba(24,24,38,0.95) 60%, rgba(12,12,18,1) 100%);
+        display: grid;
+      }
+      .flappy-stage canvas {
+        width: 100%;
+        height: 100%;
+        display: block;
+        background: transparent;
+        image-rendering: pixelated;
+        touch-action: none;
+      }
+      .flappy-meta {
+        display: grid;
+        gap: 6px;
+        justify-items: center;
+      }
+      .flappy-score-label {
+        font-size: 11px;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: rgba(245,245,247,0.58);
+      }
+      .flappy-score {
+        font-size: 30px;
+        font-weight: 900;
+        letter-spacing: 0.18em;
+        color: var(--primary);
+        text-shadow: 0 4px 18px rgba(169,112,255,0.45);
+      }
+      .flappy-instruction {
+        font-size: 13px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: rgba(245,245,247,0.72);
+      }
+      .flappy-callout {
+        font-size: 12px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: rgba(169,112,255,0.85);
+      }
     }
-    .flappy-title {
-      margin: 0;
-      font-size: 18px;
-      letter-spacing: 0.3em;
-      text-transform: uppercase;
-      color: rgba(245,245,247,0.78);
-    }
-    .flappy-stage {
-      position: relative;
-      width: min(360px, 100%);
-      border-radius: 20px;
-      overflow: hidden;
-      background: linear-gradient(180deg, rgba(10,10,16,1) 0%, rgba(24,24,38,0.95) 60%, rgba(12,12,18,1) 100%);
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: inset 0 0 26px rgba(0,0,0,0.5);
-      aspect-ratio: 8 / 11;
-      display: grid;
-    }
-    .flappy-stage canvas {
-      width: 100%;
-      height: 100%;
-      display: block;
-      background: transparent;
-      image-rendering: pixelated;
-      touch-action: none;
-    }
-    .flappy-meta {
-      display: grid;
-      gap: 6px;
-      justify-items: center;
-    }
-    .flappy-score-label {
-      font-size: 11px;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: rgba(245,245,247,0.58);
-    }
-    .flappy-score {
-      font-size: 30px;
-      font-weight: 900;
-      letter-spacing: 0.18em;
-      color: var(--primary);
-      text-shadow: 0 4px 18px rgba(169,112,255,0.45);
-    }
-    .flappy-instruction {
-      font-size: 13px;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: rgba(245,245,247,0.72);
-    }
-    .flappy-callout {
-      font-size: 12px;
-      letter-spacing: 0.14em;
-      text-transform: uppercase;
-      color: rgba(169,112,255,0.85);
+
+    @media (max-width: 480px) {
+      body { padding: 24px 12px 48px; }
+      .flappy-card { width: min(320px, 96%); padding: 18px 16px 20px; }
+      .flappy-stage { aspect-ratio: 9 / 14; }
+      .flappy-score { font-size: 26px; }
+      .flappy-instruction { font-size: 12px; }
     }
 
     @media (max-width: 1200px) {
@@ -2150,20 +2199,22 @@
     </aside>
     <main class="content">
     
-  <section class="mobile-flappy" aria-label="TIRED flappy grind">
-    <div class="flappy-card">
-      <h2 class="flappy-title">TIRED FLAPPY</h2>
-      <div class="flappy-stage">
-        <canvas width="320" height="420" aria-label="TIRED flappy canvas"></canvas>
+  <div class="mobile-flappy-wrapper">
+    <section class="mobile-flappy" aria-label="TIRED flappy grind">
+      <div class="flappy-card">
+        <h2 class="flappy-title">TIRED FLAPPY</h2>
+        <div class="flappy-stage">
+          <canvas width="320" height="420" aria-label="TIRED flappy canvas"></canvas>
+        </div>
+        <div class="flappy-meta">
+          <span class="flappy-score-label">Score</span>
+          <span class="flappy-score">0</span>
+          <span class="flappy-instruction">Tap to flap.</span>
+          <span class="flappy-callout">OPEN DESKTOP MF.</span>
+        </div>
       </div>
-      <div class="flappy-meta">
-        <span class="flappy-score-label">Score</span>
-        <span class="flappy-score">0</span>
-        <span class="flappy-instruction">Tap to flap.</span>
-        <span class="flappy-callout">OPEN DESKTOP MF.</span>
-      </div>
-    </div>
-  </section>
+    </section>
+  </div>
 
 
     
@@ -3072,13 +3123,15 @@
     if (flappyStage) {
       const mobileQuery = window.matchMedia('(max-width: 640px)');
       const canvas = flappyStage.querySelector('canvas');
-      const scoreEl = flappyStage.parentElement.querySelector('.flappy-score');
-      const instructionEl = flappyStage.parentElement.querySelector('.flappy-instruction');
-      const calloutEl = flappyStage.parentElement.querySelector('.flappy-callout');
+      if (!canvas) return;
+      const card = flappyStage.closest('.flappy-card');
+      const scoreEl = card?.querySelector('.flappy-score');
+      const instructionEl = card?.querySelector('.flappy-instruction');
+      const calloutEl = card?.querySelector('.flappy-callout');
       const ctx = canvas.getContext('2d');
       const WIDTH = canvas.width;
       const HEIGHT = canvas.height;
-      const FLOOR = HEIGHT - 28;
+      const FLOOR = HEIGHT - 32;
       const primaryValue = (getComputedStyle(document.documentElement).getPropertyValue('--primary') || '#a970ff').trim() || '#a970ff';
       const birdImg = new Image();
       let birdReady = false;
@@ -3138,6 +3191,7 @@
       };
 
       const handleInput = (event) => {
+        if (!mobileQuery.matches) return;
         event?.preventDefault?.();
         flap();
       };
@@ -3146,8 +3200,10 @@
       canvas.addEventListener('touchstart', handleInput, { passive: true });
       document.addEventListener('keydown', (event) => {
         if (event.code === 'Space') {
-          event.preventDefault();
-          handleInput(event);
+          if (mobileQuery.matches) {
+            event.preventDefault();
+            handleInput(event);
+          }
         }
       });
 
@@ -3203,12 +3259,21 @@
                 setGameOver();
               }
             }
-          } else if (pipe.x + pipeWidth < -60) {
-            pipe.x = WIDTH + 120;
-            const minTop = 40;
-            const maxTop = HEIGHT - pipeGap - 80;
-            pipe.top = Math.random() * (maxTop - minTop) + minTop;
-            pipe.passed = false;
+            if (pipe.x + pipeWidth < -60) {
+              pipe.x = WIDTH + 120;
+              const minTop = 40;
+              const maxTop = HEIGHT - pipeGap - 80;
+              pipe.top = Math.random() * (maxTop - minTop) + minTop;
+              pipe.passed = false;
+            }
+          } else {
+            if (pipe.x + pipeWidth < -20) {
+              pipe.x = WIDTH + 160;
+              const minTop = 60;
+              const maxTop = HEIGHT - pipeGap - 80;
+              pipe.top = Math.random() * (maxTop - minTop) + minTop;
+              pipe.passed = false;
+            }
           }
         });
 
@@ -3231,7 +3296,6 @@
           bird.y = bird.size;
           setGameOver();
         }
-
       };
 
       const step = () => {
@@ -3260,23 +3324,23 @@
         }
       };
 
-      if (mobileQuery.matches) {
-        startGame();
-      } else {
-        resetGame();
-        stopGame();
-      }
-
-      mobileQuery.addEventListener?.('change', (event) => {
-        if (event.matches) {
+      const syncGame = () => {
+        if (mobileQuery.matches) {
           startGame();
         } else {
           stopGame();
+          resetGame();
         }
-      });
-    }
+      };
 
-  </script>
+      if (mobileQuery.addEventListener) {
+        mobileQuery.addEventListener('change', syncGame);
+      } else if (mobileQuery.addListener) {
+        mobileQuery.addListener(syncGame);
+      }
+
+      syncGame();
+    }  </script>
   <script>
 
     (() => {
