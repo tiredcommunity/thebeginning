@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>TIRED Dev • Build Mode</title>
+  <link rel="icon" href="logo.png" type="image/png" sizes="32x32" />
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0f0f12;
+      --panel: #18181b;
+      --panel-alt: #1f1f23;
+      --border: #2f2f35;
+      --primary: #a970ff;
+      --primary-strong: #772ce8;
+      --text: #f5f5f7;
+      --muted: #b5b5c0;
+      font-family: "Inter", "Helvetica Neue", "Segoe UI", sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      min-height: 100vh;
+      background: radial-gradient(circle at 20% -10%, rgba(169,112,255,0.18), transparent 60%), var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: clamp(32px, 6vw, 60px) clamp(18px, 5vw, 48px);
+      gap: clamp(28px, 6vw, 48px);
+    }
+    header {
+      width: min(960px, 100%);
+      display: grid;
+      gap: 22px;
+      text-align: center;
+    }
+    header h1 {
+      margin: 0;
+      font-size: clamp(38px, 7vw, 54px);
+      letter-spacing: -0.01em;
+    }
+    header p {
+      margin: 0;
+      font-size: clamp(16px, 3.1vw, 19px);
+      color: rgba(245,245,247,0.78);
+      line-height: 1.6;
+    }
+    .badge {
+      justify-self: center;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 18px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      font-size: 13px;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: rgba(245,245,247,0.82);
+    }
+    .grid {
+      width: min(1080px, 100%);
+      display: grid;
+      gap: clamp(20px, 4vw, 32px);
+    }
+    section.card {
+      background: linear-gradient(150deg, rgba(26,26,34,0.92), rgba(12,12,20,0.88));
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 22px;
+      padding: clamp(24px, 5vw, 32px);
+      display: grid;
+      gap: 20px;
+      box-shadow: 0 30px 68px rgba(0,0,0,0.5);
+      position: relative;
+      overflow: hidden;
+    }
+    section.card::after {
+      content: "";
+      position: absolute;
+      inset: -40% 40% 30% -30%;
+      background: radial-gradient(circle, rgba(169,112,255,0.18), transparent 70%);
+      opacity: 0.6;
+      pointer-events: none;
+      transform: rotate(16deg);
+    }
+    section.card h2 {
+      margin: 0;
+      font-size: 20px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(245,245,247,0.74);
+    }
+    .card p {
+      margin: 0;
+      font-size: 15px;
+      line-height: 1.7;
+      color: rgba(245,245,247,0.75);
+    }
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.16);
+      background: rgba(255,255,255,0.06);
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(245,245,247,0.82);
+    }
+    .highlight-list {
+      display: grid;
+      gap: 14px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .highlight-list li {
+      display: grid;
+      gap: 6px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 14px 16px;
+    }
+    .highlight-list strong {
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(245,245,247,0.76);
+    }
+    .highlight-list span {
+      font-size: 14px;
+      color: rgba(245,245,247,0.7);
+      line-height: 1.6;
+    }
+    .cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 28px;
+      border-radius: 999px;
+      border: none;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      background: var(--primary);
+      color: #100f15;
+      text-decoration: none;
+      box-shadow: 0 26px 44px rgba(169,112,255,0.45);
+      cursor: pointer;
+    }
+    .cta.secondary {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.26);
+      color: rgba(245,245,247,0.82);
+      box-shadow: none;
+    }
+    footer {
+      width: min(960px, 100%);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      justify-content: center;
+    }
+    .link-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .link-row a {
+      color: rgba(245,245,247,0.75);
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      font-size: 12px;
+    }
+    @media (max-width: 560px) {
+      body { padding: 28px 16px 60px; }
+      header h1 { font-size: 32px; }
+      .badge { font-size: 11px; letter-spacing: 0.2em; }
+      .cta { width: 100%; }
+      .link-row { justify-content: center; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <span class="badge">Builder Portal</span>
+    <h1>TIRED Dev Hub</h1>
+    <p>Peek behind the curtain. Meet the builder stitching memes into markets, running the raids, and shipping the TIRED experience across screens.</p>
+  </header>
+
+  <div class="grid">
+    <section class="card">
+      <h2>Who&#8217;s coding the chaos?</h2>
+      <p>Hey, I&#8217;m the dev keeping TIRED sharp. Frontend finesse, real-time antics, and enough caffeine routing to keep the timeline entertained.</p>
+      <div class="pill-row">
+        <span class="pill">Frontend-Native</span>
+        <span class="pill">Motion-First</span>
+        <span class="pill">Design x Code</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Current stack</h2>
+      <div class="pill-row">
+        <span class="pill">React / Next</span>
+        <span class="pill">TypeScript</span>
+        <span class="pill">Tailwind</span>
+        <span class="pill">GSAP</span>
+        <span class="pill">Three.js</span>
+        <span class="pill">Node APIs</span>
+        <span class="pill">Supabase</span>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Proof of work</h2>
+      <ul class="highlight-list">
+        <li>
+          <strong>24h Sprint</strong>
+          <span>Delivered TIRED interactive landing page with hero animations, chat widget, and easter eggs overnight.</span>
+        </li>
+        <li>
+          <strong>Raid Dashboard</strong>
+          <span>Prototype for live raid orchestration: wallet-gated missions, leaderboards, and on-chain callouts.</span>
+        </li>
+        <li>
+          <strong>Memecoin Tooling</strong>
+          <span>Internal scripts that monitor social velocity + price action to surface instant meme opportunities.</span>
+        </li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <h2>Open collabs</h2>
+      <p>Looking to co-build extensions, integrate trading APIs, or launch a TIRED-inspired product? Let&#8217;s talk.</p>
+      <div class="pill-row">
+        <span class="pill">UI revamps</span>
+        <span class="pill">Drops &amp; gamification</span>
+        <span class="pill">Realtime dashboards</span>
+        <span class="pill">Mobile raids</span>
+      </div>
+    </section>
+  </div>
+
+  <footer>
+    <div class="link-row">
+      <a class="cta" href="mailto:gm@tiredbuilder.xyz">Drop a gm</a>
+      <a class="cta secondary" href="index.html">Back to TIRED</a>
+    </div>
+    <div class="link-row">
+      <a href="https://x.com/Tired_Coin_Sol" target="_blank" rel="noopener">X</a>
+      <a href="https://discord.com" target="_blank" rel="noopener">Discord</a>
+      <a href="https://github.com" target="_blank" rel="noopener">GitHub</a>
+    </div>
+  </footer>
+</body>
+</html>

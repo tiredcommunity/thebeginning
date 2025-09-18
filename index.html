@@ -82,6 +82,23 @@
       font-weight: 600;
     }
     .nav-links a.active { color: var(--primary); }
+    .nav-links .dev-link {
+      padding: 4px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      font-size: 11px;
+      color: rgba(245,245,247,0.82);
+      transition: border-color 0.2s ease, color 0.2s ease, background 0.2s ease;
+    }
+    .nav-links .dev-link:hover,
+    .nav-links .dev-link:focus-visible {
+      border-color: rgba(255,255,255,0.32);
+      color: var(--primary);
+      background: rgba(169,112,255,0.14);
+      outline: none;
+    }
     .nav-links .divider {
       width: 4px;
       height: 4px;
@@ -2596,6 +2613,7 @@
         <a href="#" class="active">Following</a>
         <a href="#" class="esports-trigger" role="button" aria-label="Trigger TIRED Esports animation">Esports</a>
         <a href="#" class="music-trigger" role="button" aria-label="Trigger TIRED Music animation">Music</a>
+        <a href="dev.html" class="dev-link">Dev</a>
       </nav>
     </div>
     <div class="search-bar">
