@@ -828,47 +828,55 @@
     .mobile-fun {
       display: none;
       min-height: 100vh;
-      padding: 48px 22px 56px;
-      background: radial-gradient(circle at 20% -10%, rgba(169,112,255,0.16), transparent 55%),
-        radial-gradient(circle at 88% 16%, rgba(56,189,248,0.18), transparent 65%),
-        var(--bg);
+      padding: 32px 20px 48px;
+      background: var(--bg);
       color: var(--text);
       text-align: center;
-      gap: 28px;
-      align-items: center;
+      gap: 24px;
+      align-items: stretch;
       justify-content: center;
       flex-direction: column;
     }
     .mobile-fun-card {
-      width: min(420px, 100%);
-      background: linear-gradient(150deg, rgba(27,27,33,0.94), rgba(11,11,18,0.92));
-      border: 1px solid rgba(255,255,255,0.14);
-      border-radius: 28px;
-      padding: clamp(28px, 8vw, 44px) clamp(24px, 8vw, 36px);
+      width: min(460px, 100%);
+      margin: 0 auto;
+      background: rgba(18,18,24,0.96);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 28px 20px;
       display: grid;
-      gap: 22px;
-      box-shadow: 0 32px 64px rgba(0,0,0,0.55);
+      gap: 18px;
+      box-shadow: 0 18px 42px rgba(0,0,0,0.35);
       position: relative;
-      overflow: hidden;
     }
-    .mobile-fun-card::before {
-      content: "";
-      position: absolute;
-      inset: -140px -140px auto;
-      height: 240px;
-      background: radial-gradient(circle at center, rgba(169,112,255,0.28), transparent 70%);
-      opacity: 0.75;
-      pointer-events: none;
-      filter: blur(8px);
+    .mobile-fun-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 13px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(239,239,241,0.6);
+    }
+    .mobile-fun-header span {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .mobile-fun-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: rgba(94,234,212,0.9);
+      box-shadow: 0 0 6px rgba(94,234,212,0.8);
     }
     .mobile-fun-logo {
-      width: clamp(72px, 22vw, 102px);
-      height: clamp(72px, 22vw, 102px);
-      border-radius: 28px;
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
       display: grid;
       place-items: center;
-      background: radial-gradient(circle at center, rgba(169,112,255,0.35), rgba(24,24,32,0.72));
-      box-shadow: 0 0 28px rgba(169,112,255,0.55);
+      background: rgba(169,112,255,0.1);
       margin: 0 auto;
     }
     .mobile-fun-logo img {
@@ -927,24 +935,57 @@
       display: grid;
       gap: 12px;
     }
+    .mobile-fun-actions > * {
+      width: 100%;
+    }
+    .mobile-fun-actions a {
+      text-decoration: none;
+    }
     .mobile-fun-button {
       border: none;
+      border-radius: 16px;
+      padding: 14px 18px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: rgba(255,255,255,0.08);
+      color: rgba(239,239,241,0.9);
+      cursor: pointer;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+    .mobile-fun-button:hover,
+    .mobile-fun-button:focus-visible {
+      background: rgba(169,112,255,0.18);
+      color: var(--text);
+      outline: none;
+    }
+    .mobile-fun-buy,
+    .mobile-fun-community {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       border-radius: 18px;
       padding: 14px 18px;
       font-weight: 700;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      background: linear-gradient(135deg, var(--primary), var(--primary-strong));
-      color: var(--text);
-      cursor: pointer;
-      box-shadow: 0 20px 40px rgba(119,44,232,0.45);
+      gap: 10px;
+    }
+    .mobile-fun-buy {
+      background: linear-gradient(135deg, #32f0ff, #6f7bff);
+      color: #0f0f12;
+      box-shadow: 0 20px 42px rgba(63,140,255,0.45);
+      text-decoration: none;
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
-    .mobile-fun-button:hover,
-    .mobile-fun-button:focus-visible {
+    .mobile-fun-buy:hover,
+    .mobile-fun-buy:focus-visible {
       transform: translateY(-2px);
-      box-shadow: 0 24px 46px rgba(119,44,232,0.55);
+      box-shadow: 0 26px 52px rgba(63,140,255,0.55);
       outline: none;
+    }
+    .mobile-fun-actions a {
+      text-decoration: none;
     }
     .mobile-fun-link {
       display: inline-flex;
@@ -960,6 +1001,20 @@
       letter-spacing: 0.1em;
       color: rgba(239,239,241,0.8);
     }
+    .mobile-fun-community {
+      border: 1px solid rgba(255,255,255,0.24);
+      background: rgba(255,255,255,0.08);
+      color: rgba(239,239,241,0.88);
+      text-decoration: none;
+      transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+    }
+    .mobile-fun-community:hover,
+    .mobile-fun-community:focus-visible {
+      background: rgba(169,112,255,0.22);
+      border-color: rgba(255,255,255,0.4);
+      color: var(--text);
+      outline: none;
+    }
     .mobile-fun-ghost {
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,0.18);
@@ -972,6 +1027,10 @@
       padding: 12px 18px;
       cursor: pointer;
       transition: color 0.2s ease, border-color 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
     .mobile-fun-ghost:hover,
     .mobile-fun-ghost:focus-visible {
@@ -1928,6 +1987,10 @@
 <body>
   <section class="mobile-fun" aria-labelledby="mobile-fun-title" aria-live="polite">
     <div class="mobile-fun-card">
+      <div class="mobile-fun-header">
+        <span>TIRED Mobile</span>
+        <span><span class="mobile-fun-dot" aria-hidden="true"></span><time data-mobile-clock>--:--</time></span>
+      </div>
       <div class="mobile-fun-logo">
         <img src="logo.png" alt="TIRED logo" />
       </div>
@@ -1935,17 +1998,21 @@
       <h1 class="mobile-fun-title" id="mobile-fun-title">Memes nap. Raiders plot.</h1>
       <p class="mobile-fun-quote" data-mobile-quote>Tap the button and we’ll whisper a fresh rally cry.</p>
       <ul class="mobile-fun-pulse">
-        <li>Lock the phone, not the grind.</li>
-        <li>Swipe fatigue? Send memes instead.</li>
-        <li>Need a mission? We’ve got ammo.</li>
+        <li>Lock the screen, not the mission.</li>
+        <li>Swipe fatigue? Spam memes instead.</li>
+        <li>Need a mission? Check your DMs.</li>
       </ul>
       <div class="mobile-fun-actions">
         <button class="mobile-fun-button" type="button" data-mobile-refresh>Shuffle mantra</button>
-        <button class="mobile-fun-ghost" type="button" data-mobile-ping>Drop raid idea</button>
-        <a class="mobile-fun-link" href="https://x.com/Tired_Coin_Sol" target="_blank" rel="noopener">Open Raid HQ</a>
+        <button class="mobile-fun-ghost" type="button" data-mobile-ping>
+          <span aria-hidden="true">🚀</span>
+          <span>Hit the rocket now</span>
+        </button>
+        <a class="mobile-fun-buy" href="https://pump.fun/T1RA9B89dAiAHdVDQU6guC2sXvWkp72ThUPKH9gk8Km" target="_blank" rel="noopener">Buy on pump.fun</a>
+        <a class="mobile-fun-link mobile-fun-community" href="https://x.com/Tired_Coin_Sol" target="_blank" rel="noopener">Join X Community</a>
       </div>
       <ul class="mobile-fun-feed" data-mobile-feed>
-        <li>🚨 Raid intel queued. Desktop squad is stretching.</li>
+        <li>🚨 Raid intel queued. Desktop squad is locked in.</li>
       </ul>
       <p class="mobile-fun-footer">TIRED MOBILE MODE · MEMES NEVER SLEEP</p>
     </div>
@@ -1986,10 +2053,10 @@
         <div class="crown-panel" hidden>
           <h3>Holder Benefits</h3>
           <ul class="crown-benefits">
-            <li><span>1.</span> You’re joining the next movement — welcome to the winners-only lounge.</li>
-            <li><span>2.</span> Your mom will ask if you bought TIRED; you can finally say “yes.”</li>
-            <li><span>3.</span> Meme clout multiplier: every raid hits twice as hard.</li>
-            <li><span>4.</span> Guaranteed first dibs on every TIRED chaos drop.</li>
+            <li><span>1.</span> The Antidote to the Shills: You're not just holding a coin; you're holding the line against the next PND. You're part of the real community, not just a liquidity exit for some streamer.</li>
+            <li><span>2.</span> Bragging Rights, Finally: The next time your mom asks about your crypto bets, you'll have a real answer. It's not just a pump and dump; it's the antidote.</li>
+            <li><span>3.</span> Meme Lord Status: We're the culture creators. Every raid you participate in, every meme you post, it all hits harder. This isn’t a multiplier; this is a reckoning.</li>
+            <li><span>4.</span> Community Call: We're all here because we're tired. Your voice matters. We'll be doing regular community polls and exclusive chats for holders to shape the future of $TIRED.</li>
           </ul>
         </div>
       </div>
@@ -2439,8 +2506,8 @@
 
   <section class="community-bar">
     <div class="copy">
-      <h2>Join the TIRED Community.</h2>
-      <p>Join the movement. Follow the memes, not the streamers. Share the laughs, not the live content. Let's make memecoins fun again.</p>
+      <h2>The antidote to the streamer meta.</h2>
+      <p>They sold out. We're buying back the culture. This isn't about live streams and paid pumps; it's about dank memes and community. Fuck the shilling. Let’s get back to what matters: the memes.</p>
     </div>
     <div class="actions">
       <a class="cta" href="https://x.com/Tired_Coin_Sol" target="_blank" rel="noopener">Sign Up</a>
@@ -2457,11 +2524,10 @@
         <span class="lockin-highlight" data-text="F*CK IN">F*CK IN</span>
       </h2>
       <div class="lockin-lines" aria-live="polite">
-        <span>F*CK STREAMS.</span>
-        <span>TRADE MEMES.</span>
-        <span>STAY TIRED. STAY WINNING.</span>
+        <span>F*CK STREAMS. TRADE MEMES.</span>
+        <span>STAY TIRED. STAY UNCHAINED.</span>
+        <span>MEME HARDER. LIVE FOREVER.</span>
       </div>
-      <p class="lockin-subtext">Meme harder. Sleep later.</p>
       <button class="lockin-close" type="button">I'M LOCKED IN.</button>
     </div>
   </div>
@@ -2533,7 +2599,7 @@
         </div>
       </div>
       <div class="profile-body">
-        <div class="profile-highlight">Welcome to the war room. Keep memes sharp, floors rising, and raiders caffeinated.</div>
+        <div class="profile-highlight"><strong>Welcome to the War Room.</strong> Our mission is clear: keep the memes Dank, the sentiment High, and the shills on the run. This isn't just a mission briefing; it's our manifesto.</div>
         <div class="profile-info">
           <div>
             <span>Command Signal</span>
@@ -2541,7 +2607,7 @@
           </div>
           <div>
             <span>Priority Mission</span>
-            <span>Mint memes • Raid feeds</span>
+            <span>Secure meme dominance.<br />Raid every corner of the web.</span>
           </div>
           <div>
             <span>Daily Combo</span>
@@ -2549,7 +2615,7 @@
           </div>
         </div>
       </div>
-      <div class="profile-footer">Stay tired. Stay loud. Memes > Streams.</div>
+      <div class="profile-footer">STAY TIRED. STAY LOUD. MEMES &gt; STREAMS.</div>
     </div>
   </div>
   <script>
@@ -2775,10 +2841,15 @@
     const chatInput = chatWidget?.querySelector('#chat-input');
     const chatLog = chatWidget?.querySelector('.chat-log');
     const chatReplies = [
-      'You’re TIRED now. Meme output > stream watchtime.',
-      'Raid squad says thanks. Did you ping @Tired_Coin_Sol already?',
       'Every meme you drop makes a streamer cry. Keep going.',
-      'Bag check: TIRED holders are the new winners circle.',
+      'You’re TIRED now. Meme output > stream watchtime.',
+      'Raid complete. The shills are in retreat. Get ready for the next one.',
+      'Drop a message and we’ll remind you why memes beat streams.',
+      'Bag check: Your portfolio is now a statement, not a bet.',
+      'Your meme energy is a direct attack on their watchtime. Charge up.',
+      'Remember when memes were just for fun? We’re bringing that back.',
+      'They built their empire on paid shilling. We’re building ours on shared laughs.',
+      'Your meme just hit different. The $TIRED effect.',
       'Reminder: Streams are for spectators. Memes are for traders.'
     ];
     let chatReplyIndex = 0;
@@ -2879,9 +2950,12 @@
         '🛡️ Shield your bags. Trolls detected on the feed.'
       ];
       const mobileQuery = window.matchMedia('(max-width: 640px)');
+      const clockEl = mobileFun.querySelector('[data-mobile-clock]');
+      const dexUrl = 'https://dexscreener.com';
       let quoteIndex = Math.floor(Math.random() * quotes.length);
       let quoteTimer = null;
       let dropTimer = null;
+      let clockTimer = null;
 
       const applyQuote = (text) => {
         if (!quoteEl) return;
@@ -2917,6 +2991,14 @@
         }
       };
 
+      const updateClock = () => {
+        if (!clockEl) return;
+        const now = new Date();
+        const hours = now.getHours().toString().padStart(2, '0');
+        const minutes = now.getMinutes().toString().padStart(2, '0');
+        clockEl.textContent = `${hours}:${minutes}`;
+      };
+
       const startDropLoop = () => {
         if (dropTimer || !mobileQuery.matches) return;
         dropTimer = window.setInterval(pushDrop, 8200);
@@ -2932,9 +3014,17 @@
         if (mobileQuery.matches) {
           startQuoteLoop();
           startDropLoop();
+          if (!clockTimer) {
+            updateClock();
+            clockTimer = window.setInterval(updateClock, 60000);
+          }
         } else {
           stopQuoteLoop();
           stopDropLoop();
+          if (clockTimer) {
+            clearInterval(clockTimer);
+            clockTimer = null;
+          }
         }
       };
 
@@ -2943,12 +3033,15 @@
         pushDrop();
       });
 
-      pingBtn?.addEventListener('click', () => {
+      pingBtn?.addEventListener('click', (event) => {
         pushDrop();
+        window.open(dexUrl, '_blank', 'noopener');
       });
 
       applyQuote(quotes[quoteIndex]);
       pushDrop();
+      updateClock();
+      clockTimer = window.setInterval(updateClock, 60000);
       handleMobileChange();
 
       if (mobileQuery.addEventListener) {
@@ -2960,6 +3053,10 @@
       window.addEventListener('pagehide', () => {
         stopQuoteLoop();
         stopDropLoop();
+        if (clockTimer) {
+          clearInterval(clockTimer);
+          clockTimer = null;
+        }
       });
     }
 
