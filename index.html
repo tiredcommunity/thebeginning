@@ -1580,6 +1580,11 @@
       background: rgba(14,14,16,0.75);
       transform: translateY(-1px);
     }
+    .carousel-nav button[disabled] {
+      opacity: 0.4;
+      pointer-events: none;
+      transform: none;
+    }
     .carousel-nav svg {
       width: 20px;
       height: 20px;
@@ -1711,6 +1716,237 @@
     .community-bar .ghost:hover {
       border-color: rgba(255,255,255,0.7);
     }
+  
+    /* Responsive tweaks */
+    @media (max-width: 1200px) {
+      .app-shell {
+        grid-template-columns: 200px 1fr;
+      }
+      main.content {
+        padding: 24px 24px 136px;
+      }
+      .slide {
+        flex: 0 0 33.333%;
+      }
+    }
+
+    @media (max-width: 960px) {
+      body {
+        grid-template-rows: auto minmax(0, 1fr);
+        padding-bottom: 160px;
+      }
+      header.top-nav {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+        padding: 16px;
+      }
+      .nav-left {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+      }
+      .nav-links {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        gap: 12px;
+      }
+      .search-bar {
+        width: 100%;
+      }
+      .search-bar form {
+        width: 100%;
+      }
+      .nav-actions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: flex-start;
+        width: 100%;
+        align-items: center;
+      }
+      .app-shell {
+        display: flex;
+        flex-direction: column;
+        min-height: unset;
+      }
+      main.content {
+        order: 1;
+        padding: 20px 16px 144px;
+      }
+      aside.sidebar {
+        order: 2;
+        border-right: none;
+        border-top: 1px solid rgba(255,255,255,0.08);
+        padding: 20px 16px 28px;
+        overflow: visible;
+      }
+      .sidebar-item {
+        grid-template-columns: 40px 1fr;
+        column-gap: 12px;
+      }
+      .sidebar-item .viewers {
+        justify-self: start;
+      }
+      .carousel-window {
+        padding: 22px 12px 32px;
+      }
+      .slide {
+        flex: 0 0 50%;
+      }
+      .carousel-nav {
+        padding: 0 12px;
+      }
+      .carousel-nav button {
+        width: 40px;
+        height: 40px;
+        margin: 0 8px;
+      }
+      .live-card .body {
+        padding: 14px 14px 18px;
+      }
+      .chat-widget {
+        bottom: calc(120px + 18px);
+        right: 16px;
+        justify-items: end;
+      }
+      .live-chat {
+        width: min(360px, calc(100vw - 32px));
+      }
+      .community-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 16px 20px;
+      }
+      .community-bar .copy {
+        flex: none;
+        max-width: none;
+      }
+    }
+
+    @media (max-width: 640px) {
+      body {
+        padding-bottom: 80px;
+      }
+      header.top-nav {
+        padding: 14px;
+        gap: 12px;
+      }
+      .logo span {
+        font-size: 18px;
+      }
+      .nav-links {
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        padding-bottom: 4px;
+        gap: 18px;
+      }
+      .nav-links::-webkit-scrollbar {
+        display: none;
+      }
+      .nav-actions {
+        width: 100%;
+        gap: 8px;
+      }
+      .icon-btn {
+        width: 32px;
+        height: 32px;
+      }
+      .login-btn,
+      .signup-btn {
+        padding: 8px 14px;
+        font-size: 13px;
+      }
+      .app-shell {
+        gap: 20px;
+      }
+      main.content {
+        padding: 18px 14px 120px;
+      }
+      aside.sidebar {
+        padding: 18px 14px 24px;
+      }
+      .sidebar-item {
+        grid-template-columns: 32px 1fr;
+        row-gap: 6px;
+      }
+      .sidebar-item .viewers {
+        font-size: 11px;
+      }
+      .carousel-window {
+        padding: 18px 10px 26px;
+      }
+      .slide {
+        flex: 0 0 100%;
+        padding: 0 8px;
+      }
+      .carousel-nav {
+        position: static;
+        margin-top: 18px;
+        transform: none;
+        justify-content: center;
+        padding: 0;
+      }
+      .carousel-nav button {
+        margin: 0 6px;
+      }
+      .card-header img {
+        width: 40px;
+        height: 40px;
+      }
+      .card-meta {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 6px;
+      }
+      .card-actions {
+        flex-direction: column;
+        gap: 8px;
+      }
+      .live-card .body {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .chat-widget {
+        bottom: 24px;
+        gap: 10px;
+      }
+      .chat-form {
+        flex-direction: column;
+        gap: 10px;
+      }
+      .chat-form button {
+        width: 100%;
+      }
+      .chat-message {
+        max-width: 100%;
+      }
+      .chat-window {
+        height: clamp(180px, 42vh, 240px);
+      }
+      .community-bar {
+        position: static;
+        border-top: none;
+        box-shadow: none;
+        padding: 20px 16px 28px;
+      }
+      .community-bar .actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+      }
+      .community-bar .cta,
+      .community-bar .ghost {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -2753,6 +2989,7 @@
     });
   </script>
   <script>
+
     (() => {
       const hero = document.querySelector('.hero-carousel');
       if (!hero) return;
@@ -2760,34 +2997,68 @@
       const slides = Array.from(track.children);
       const prev = hero.querySelector('.carousel-nav .prev');
       const next = hero.querySelector('.carousel-nav .next');
-      const slidesPerPage = 4;
-      const pageCount = Math.max(1, Math.ceil(slides.length / slidesPerPage));
-      let current = 0;
-      let timer;
       const interval = 6000;
+      let timer;
+      let slidesPerPage = 4;
+      let pageCount = 1;
+      let currentPage = 0;
 
-      const stop = () => {
+      const getSlidesPerPage = () => {
+        if (window.matchMedia('(max-width: 640px)').matches) return 1;
+        if (window.matchMedia('(max-width: 960px)').matches) return 2;
+        if (window.matchMedia('(max-width: 1200px)').matches) return 3;
+        return 4;
+      };
+
+      const applyTransform = () => {
+        track.style.transform = `translateX(-${currentPage * 100}%)`;
+      };
+
+      function stop() {
         if (timer) {
           clearInterval(timer);
           timer = null;
         }
-      };
+      }
 
-      const restart = () => {
+      function restart() {
         stop();
         if (pageCount <= 1) return;
-        timer = setInterval(() => setSlide(current + 1, false), interval);
-      };
+        timer = window.setInterval(() => setSlide(currentPage + 1, false), interval);
+      }
 
-      const setSlide = (index, allowRestart = true) => {
+      function setSlide(index, allowRestart = true) {
         if (pageCount === 0) return;
-        current = (index + pageCount) % pageCount;
-        track.style.transform = `translateX(-${current * 100}%)`;
+        currentPage = (index + pageCount) % pageCount;
+        applyTransform();
         if (allowRestart) restart();
-      };
+      }
 
-      next?.addEventListener('click', () => setSlide(current + 1));
-      prev?.addEventListener('click', () => setSlide(current - 1));
+      function recalc(force = false) {
+        const firstVisibleIndex = currentPage * slidesPerPage;
+        const nextSlidesPerPage = getSlidesPerPage();
+        if (!force && nextSlidesPerPage === slidesPerPage) {
+          pageCount = Math.max(1, Math.ceil(slides.length / slidesPerPage));
+          currentPage = Math.min(currentPage, pageCount - 1);
+          const disableNav = pageCount <= 1;
+          prev?.toggleAttribute('disabled', disableNav);
+          next?.toggleAttribute('disabled', disableNav);
+          applyTransform();
+          restart();
+          return;
+        }
+        slidesPerPage = nextSlidesPerPage;
+        pageCount = Math.max(1, Math.ceil(slides.length / slidesPerPage));
+        currentPage = Math.max(0, Math.min(Math.floor(firstVisibleIndex / slidesPerPage), pageCount - 1));
+        const disableNav = pageCount <= 1;
+        prev?.toggleAttribute('disabled', disableNav);
+        next?.toggleAttribute('disabled', disableNav);
+        applyTransform();
+        restart();
+      }
+
+      next?.addEventListener('click', () => setSlide(currentPage + 1));
+      prev?.addEventListener('click', () => setSlide(currentPage - 1));
 
       hero.addEventListener('pointerenter', stop);
       hero.addEventListener('pointerleave', restart);
@@ -2798,8 +3069,9 @@
         }
       });
 
-      setSlide(0, false);
-      restart();
+      window.addEventListener('resize', () => recalc());
+
+      recalc(true);
     })();
   </script>
 </body>
