@@ -1749,15 +1749,83 @@
       border-color: rgba(255,255,255,0.7);
     }
   
-    .mobile-flappy {
-      display: none;
-    }
     .sidebar-list {
       display: grid;
       gap: 10px;
     }
 
-    /* Responsive tweaks */
+    .mobile-flappy {
+      display: none;
+    }
+    .flappy-card {
+      background: linear-gradient(150deg, rgba(24,24,34,0.96), rgba(12,12,18,0.9));
+      border: 1px solid rgba(255,255,255,0.16);
+      border-radius: 24px;
+      padding: clamp(20px, 5vw, 26px);
+      box-shadow: 0 32px 64px rgba(0,0,0,0.55);
+      display: grid;
+      gap: 18px;
+      align-items: center;
+      justify-items: center;
+      text-align: center;
+    }
+    .flappy-title {
+      margin: 0;
+      font-size: 18px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(245,245,247,0.78);
+    }
+    .flappy-stage {
+      position: relative;
+      width: min(360px, 100%);
+      border-radius: 20px;
+      overflow: hidden;
+      background: linear-gradient(180deg, rgba(10,10,16,1) 0%, rgba(24,24,38,0.95) 60%, rgba(12,12,18,1) 100%);
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: inset 0 0 26px rgba(0,0,0,0.5);
+      aspect-ratio: 8 / 11;
+      display: grid;
+    }
+    .flappy-stage canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      background: transparent;
+      image-rendering: pixelated;
+      touch-action: none;
+    }
+    .flappy-meta {
+      display: grid;
+      gap: 6px;
+      justify-items: center;
+    }
+    .flappy-score-label {
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(245,245,247,0.58);
+    }
+    .flappy-score {
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 0.18em;
+      color: var(--primary);
+      text-shadow: 0 4px 18px rgba(169,112,255,0.45);
+    }
+    .flappy-instruction {
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(245,245,247,0.72);
+    }
+    .flappy-callout {
+      font-size: 12px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(169,112,255,0.85);
+    }
+
     @media (max-width: 1200px) {
       .app-shell {
         grid-template-columns: 200px 1fr;
@@ -1893,14 +1961,14 @@
         display: flex;
         flex-direction: column;
         align-items: center;
+        justify-content: flex-start;
         gap: 24px;
+        min-height: 100vh;
       }
-      header.top-nav,
-      .app-shell,
-      .community-bar,
-      .chat-widget {
-        display: none !important;
-      }
+      header.top-nav { display: none !important; }
+      .app-shell { display: none !important; }
+      .community-bar { display: none !important; }
+      .chat-widget { display: none !important; }
       .mobile-flappy {
         display: grid;
         justify-items: center;
@@ -2084,13 +2152,15 @@
     
   <section class="mobile-flappy" aria-label="TIRED flappy grind">
     <div class="flappy-card">
+      <h2 class="flappy-title">TIRED FLAPPY</h2>
       <div class="flappy-stage">
         <canvas width="320" height="420" aria-label="TIRED flappy canvas"></canvas>
-        <div class="flappy-message" aria-live="polite">
-          <span class="flappy-score">0</span>
-          <span class="flappy-instruction">Tap to flap.</span>
-          <span class="flappy-callout">OPEN DESKTOP MF.</span>
-        </div>
+      </div>
+      <div class="flappy-meta">
+        <span class="flappy-score-label">Score</span>
+        <span class="flappy-score">0</span>
+        <span class="flappy-instruction">Tap to flap.</span>
+        <span class="flappy-callout">OPEN DESKTOP MF.</span>
       </div>
     </div>
   </section>
@@ -3001,13 +3071,10 @@
     const flappyStage = document.querySelector('.mobile-flappy .flappy-stage');
     if (flappyStage) {
       const mobileQuery = window.matchMedia('(max-width: 640px)');
-      if (!mobileQuery.matches) {
-        return;
-      }
       const canvas = flappyStage.querySelector('canvas');
-      const scoreEl = flappyStage.querySelector('.flappy-score');
-      const instructionEl = flappyStage.querySelector('.flappy-instruction');
-      const calloutEl = flappyStage.querySelector('.flappy-callout');
+      const scoreEl = flappyStage.parentElement.querySelector('.flappy-score');
+      const instructionEl = flappyStage.parentElement.querySelector('.flappy-instruction');
+      const calloutEl = flappyStage.parentElement.querySelector('.flappy-callout');
       const ctx = canvas.getContext('2d');
       const WIDTH = canvas.width;
       const HEIGHT = canvas.height;
@@ -3045,11 +3112,11 @@
         if (calloutEl) calloutEl.textContent = 'OPEN DESKTOP MF.';
       };
 
-      const spawnPipe = () => {
+      const spawnPipe = (startX = WIDTH) => {
         const minTop = 40;
         const maxTop = HEIGHT - pipeGap - 80;
         const top = Math.random() * (maxTop - minTop) + minTop;
-        pipes.push({ x: WIDTH, top, passed: false });
+        pipes.push({ x: startX, top, passed: false });
       };
 
       const setGameOver = () => {
@@ -3061,6 +3128,8 @@
       const flap = () => {
         if (gameOver) {
           resetGame();
+          spawnPipe(WIDTH * 0.8);
+          spawnPipe(WIDTH + 160);
           return;
         }
         started = true;
@@ -3119,22 +3188,33 @@
           if (frame % pipeInterval === 0) spawnPipe();
         }
 
-        pipes = pipes.filter((pipe) => pipe.x + pipeWidth > -10);
         pipes.forEach((pipe) => {
+          const activeSpeed = (started && !gameOver) ? pipeSpeed : pipeSpeed * 0.35;
+          pipe.x -= activeSpeed;
+
           if (started && !gameOver) {
-            pipe.x -= pipeSpeed;
-          }
-          if (!pipe.passed && pipe.x + pipeWidth < bird.x - bird.size) {
-            pipe.passed = true;
-            score += 1;
-            if (scoreEl) scoreEl.textContent = String(score);
-          }
-          if (!gameOver && pipe.x < bird.x + bird.size && pipe.x + pipeWidth > bird.x - bird.size) {
-            if (bird.y - bird.size < pipe.top || bird.y + bird.size > pipe.top + pipeGap) {
-              setGameOver();
+            if (!pipe.passed && pipe.x + pipeWidth < bird.x - bird.size) {
+              pipe.passed = true;
+              score += 1;
+              if (scoreEl) scoreEl.textContent = String(score);
             }
+            if (pipe.x < bird.x + bird.size && pipe.x + pipeWidth > bird.x - bird.size) {
+              if (bird.y - bird.size < pipe.top || bird.y + bird.size > pipe.top + pipeGap) {
+                setGameOver();
+              }
+            }
+          } else if (pipe.x + pipeWidth < -60) {
+            pipe.x = WIDTH + 120;
+            const minTop = 40;
+            const maxTop = HEIGHT - pipeGap - 80;
+            pipe.top = Math.random() * (maxTop - minTop) + minTop;
+            pipe.passed = false;
           }
         });
+
+        if (started && !gameOver) {
+          pipes = pipes.filter((pipe) => pipe.x + pipeWidth > -120);
+        }
 
         drawPipes();
         drawBird();
@@ -3168,6 +3248,8 @@
 
       const startGame = () => {
         resetGame();
+        spawnPipe(WIDTH * 0.8);
+        spawnPipe(WIDTH + 160);
         startLoop();
       };
 
