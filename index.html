@@ -171,8 +171,6 @@
     }
     .notification-wrapper {
       position: relative;
-      display: inline-flex;
-      align-items: center;
     }
     .notification-btn {
       position: relative;
@@ -428,27 +426,6 @@
       transform: translateY(-2px);
       outline: none;
     }
-    @keyframes mobile-float {
-      0%, 100% { transform: translateY(0) scale(1); }
-      50% { transform: translateY(-8px) scale(1.04); }
-    }
-
-    @keyframes mobile-glow {
-      0% { transform: rotate(0deg) scale(1); opacity: 0.4; }
-      50% { transform: rotate(180deg) scale(1.1); opacity: 0.75; }
-      100% { transform: rotate(360deg) scale(1); opacity: 0.4; }
-    }
-    @keyframes mobile-marquee {
-      0% { transform: translateX(0); }
-      100% { transform: translateX(-50%); }
-    }
-    @keyframes mobile-sheen {
-      0% { transform: translateX(-120%); opacity: 0; }
-      40% { opacity: 0.8; }
-      60% { opacity: 0.8; }
-      100% { transform: translateX(120%); opacity: 0; }
-    }
-
     @keyframes overlay-fade {
       from { opacity: 0; }
       to { opacity: 1; }
@@ -848,6 +825,208 @@
       64% { transform: translate3d(-6px, -34px, 0) scale(1.05); opacity: 0.65; }
       100% { transform: translate3d(10px, -62px, 0) scale(0.92); opacity: 0; }
     }
+    .mobile-fun {
+      display: none;
+      min-height: 100vh;
+      padding: 48px 22px 56px;
+      background: radial-gradient(circle at 20% -10%, rgba(169,112,255,0.16), transparent 55%),
+        radial-gradient(circle at 88% 16%, rgba(56,189,248,0.18), transparent 65%),
+        var(--bg);
+      color: var(--text);
+      text-align: center;
+      gap: 28px;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+    .mobile-fun-card {
+      width: min(420px, 100%);
+      background: linear-gradient(150deg, rgba(27,27,33,0.94), rgba(11,11,18,0.92));
+      border: 1px solid rgba(255,255,255,0.14);
+      border-radius: 28px;
+      padding: clamp(28px, 8vw, 44px) clamp(24px, 8vw, 36px);
+      display: grid;
+      gap: 22px;
+      box-shadow: 0 32px 64px rgba(0,0,0,0.55);
+      position: relative;
+      overflow: hidden;
+    }
+    .mobile-fun-card::before {
+      content: "";
+      position: absolute;
+      inset: -140px -140px auto;
+      height: 240px;
+      background: radial-gradient(circle at center, rgba(169,112,255,0.28), transparent 70%);
+      opacity: 0.75;
+      pointer-events: none;
+      filter: blur(8px);
+    }
+    .mobile-fun-logo {
+      width: clamp(72px, 22vw, 102px);
+      height: clamp(72px, 22vw, 102px);
+      border-radius: 28px;
+      display: grid;
+      place-items: center;
+      background: radial-gradient(circle at center, rgba(169,112,255,0.35), rgba(24,24,32,0.72));
+      box-shadow: 0 0 28px rgba(169,112,255,0.55);
+      margin: 0 auto;
+    }
+    .mobile-fun-logo img {
+      width: 62%;
+      height: auto;
+      display: block;
+      filter: drop-shadow(0 0 12px rgba(169,112,255,0.6));
+    }
+    .mobile-fun-eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: rgba(169,112,255,0.82);
+      margin: 0;
+    }
+    .mobile-fun-title {
+      margin: 0;
+      font-size: clamp(26px, 7vw, 36px);
+      font-weight: 900;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+    }
+    .mobile-fun-quote {
+      margin: 0;
+      font-size: clamp(16px, 4.6vw, 19px);
+      line-height: 1.6;
+      color: rgba(239,239,241,0.85);
+    }
+    .mobile-fun-quote.is-changing {
+      animation: mobile-fun-glow 0.45s ease;
+    }
+    @keyframes mobile-fun-glow {
+      0% { opacity: 0; transform: translateY(6px); }
+      50% { opacity: 1; transform: translateY(-2px); }
+      100% { opacity: 1; transform: translateY(0); }
+    }
+    .mobile-fun-pulse {
+      display: grid;
+      gap: 12px;
+      text-align: left;
+    }
+    .mobile-fun-pulse li {
+      list-style: none;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      color: rgba(239,239,241,0.78);
+    }
+    .mobile-fun-pulse li::before {
+      content: "✶";
+      font-size: 12px;
+      color: var(--primary);
+    }
+    .mobile-fun-actions {
+      display: grid;
+      gap: 12px;
+    }
+    .mobile-fun-button {
+      border: none;
+      border-radius: 18px;
+      padding: 14px 18px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      background: linear-gradient(135deg, var(--primary), var(--primary-strong));
+      color: var(--text);
+      cursor: pointer;
+      box-shadow: 0 20px 40px rgba(119,44,232,0.45);
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+    .mobile-fun-button:hover,
+    .mobile-fun-button:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 24px 46px rgba(119,44,232,0.55);
+      outline: none;
+    }
+    .mobile-fun-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-radius: 16px;
+      padding: 12px 18px;
+      border: 1px solid rgba(255,255,255,0.18);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: rgba(239,239,241,0.8);
+    }
+    .mobile-fun-ghost {
+      border-radius: 16px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: transparent;
+      color: rgba(239,239,241,0.75);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 12px 18px;
+      cursor: pointer;
+      transition: color 0.2s ease, border-color 0.2s ease;
+    }
+    .mobile-fun-ghost:hover,
+    .mobile-fun-ghost:focus-visible {
+      color: var(--text);
+      border-color: rgba(255,255,255,0.4);
+      outline: none;
+    }
+    .mobile-fun-feed {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      text-align: left;
+    }
+    .mobile-fun-feed li {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 10px 14px;
+      font-size: 13px;
+      color: rgba(239,239,241,0.78);
+    }
+    .mobile-fun-footer {
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: rgba(239,239,241,0.52);
+    }
+    @media (max-width: 640px) {
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: 0;
+      }
+      header.top-nav,
+      .app-shell,
+      .chat-widget,
+      .community-bar,
+      .lockin-overlay,
+      .stream-overlay,
+      .profile-modal,
+      .esports-easter-egg,
+      .music-easter-egg,
+      .meme-toast {
+        display: none !important;
+      }
+      .mobile-fun {
+        display: flex;
+      }
+    }
     .chat-widget {
       position: fixed;
       bottom: calc(104px + 28px);
@@ -921,6 +1100,9 @@
     .live-chat.open {
       opacity: 1;
       transform: translateY(0) scale(1);
+    }
+    .live-chat[hidden] {
+      display: none !important;
     }
     .live-chat header {
       display: flex;
@@ -1118,7 +1300,6 @@
       gap: 22px;
       min-height: clamp(240px, 38vw, 320px);
       overflow: hidden;
-      backdrop-filter: blur(8px);
     }
     .stream-stage::before,
     .stream-stage::after {
@@ -1270,7 +1451,6 @@
       position: relative;
       display: inline-flex;
       align-items: center;
-      gap: 12px;
     }
     .crown-trigger {
       position: relative;
@@ -1612,11 +1792,6 @@
       background: rgba(14,14,16,0.75);
       transform: translateY(-1px);
     }
-    .carousel-nav button[disabled] {
-      opacity: 0.4;
-      pointer-events: none;
-      transform: none;
-    }
     .carousel-nav svg {
       width: 20px;
       height: 20px;
@@ -1748,309 +1923,33 @@
     .community-bar .ghost:hover {
       border-color: rgba(255,255,255,0.7);
     }
-  
-    .sidebar-list {
-      display: grid;
-      gap: 10px;
-    }
-
-    body {
-      margin: 0;
-      min-height: 100vh;
-      background: var(--bg);
-      color: var(--text);
-      font-family: inherit;
-      -webkit-font-smoothing: antialiased;
-    }
-    .mobile-only { display: none; }
-
-    .mobile-flappy-wrapper {
-      display: none;
-    }
-
-    @media (max-width: 640px) {
-      body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        padding: 24px 16px 60px;
-        gap: 18px;
-        background: radial-gradient(circle at 20% -10%, rgba(169,112,255,0.18), transparent 55%), var(--bg);
-        overflow: hidden;
-      }
-      header.top-nav,
-      .app-shell,
-      .community-bar,
-      .chat-widget,
-      .lockin-overlay,
-      .meme-toast {
-        display: none !important;
-      }
-      .mobile-flappy-wrapper {
-        display: grid;
-        justify-items: center;
-        gap: 18px;
-        width: min(380px, 100%);
-      }
-      .mobile-flappy {
-        display: block;
-        width: 100%;
-      }
-      .flappy-card {
-        background: linear-gradient(150deg, rgba(24,24,34,0.96), rgba(12,12,18,0.9));
-        border: 1px solid rgba(255,255,255,0.16);
-        border-radius: 24px;
-        padding: 20px 22px 24px;
-        box-shadow: 0 32px 64px rgba(0,0,0,0.55);
-        display: grid;
-        gap: 18px;
-        align-items: center;
-        justify-items: center;
-        text-align: center;
-      }
-      .flappy-title {
-        margin: 0;
-        font-size: 18px;
-        letter-spacing: 0.3em;
-        text-transform: uppercase;
-        color: rgba(245,245,247,0.78);
-      }
-      .flappy-stage {
-        position: relative;
-        width: min(360px, 100%);
-        border-radius: 20px;
-        overflow: hidden;
-        border: 1px solid rgba(255,255,255,0.12);
-        box-shadow: inset 0 0 26px rgba(0,0,0,0.5);
-        aspect-ratio: 8 / 11;
-        background: linear-gradient(180deg, rgba(10,10,16,1) 0%, rgba(24,24,38,0.95) 60%, rgba(12,12,18,1) 100%);
-        display: grid;
-      }
-      .flappy-stage canvas {
-        width: 100%;
-        height: 100%;
-        display: block;
-        background: transparent;
-        image-rendering: pixelated;
-        touch-action: none;
-      }
-      .flappy-meta {
-        display: grid;
-        gap: 6px;
-        justify-items: center;
-      }
-      .flappy-score-label {
-        font-size: 11px;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: rgba(245,245,247,0.58);
-      }
-      .flappy-score {
-        font-size: 30px;
-        font-weight: 900;
-        letter-spacing: 0.18em;
-        color: var(--primary);
-        text-shadow: 0 4px 18px rgba(169,112,255,0.45);
-      }
-      .flappy-instruction {
-        font-size: 13px;
-        letter-spacing: 0.1em;
-        text-transform: uppercase;
-        color: rgba(245,245,247,0.72);
-      }
-      .flappy-callout {
-        font-size: 12px;
-        letter-spacing: 0.14em;
-        text-transform: uppercase;
-        color: rgba(169,112,255,0.85);
-      }
-    }
-
-    @media (max-width: 480px) {
-      body { padding: 24px 12px 48px; }
-      .flappy-card { width: min(320px, 96%); padding: 18px 16px 20px; }
-      .flappy-stage { aspect-ratio: 9 / 14; }
-      .flappy-score { font-size: 26px; }
-      .flappy-instruction { font-size: 12px; }
-    }
-
-    @media (max-width: 1200px) {
-      .app-shell {
-        grid-template-columns: 200px 1fr;
-      }
-      main.content {
-        padding: 24px 24px 136px;
-      }
-      .slide {
-        flex: 0 0 33.333%;
-      }
-    }
-
-    @media (max-width: 960px) {
-      body {
-        grid-template-rows: auto minmax(0, 1fr);
-        padding-bottom: 160px;
-      }
-      header.top-nav {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        gap: 18px;
-        padding: 18px;
-      }
-      .nav-left {
-        width: 100%;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        gap: 16px;
-      }
-      .nav-links {
-        width: 100%;
-        justify-content: flex-start;
-        flex-wrap: wrap;
-        gap: 14px;
-      }
-      .search-bar {
-        width: 100%;
-        order: 3;
-      }
-      .search-bar form {
-        width: 100%;
-      }
-      .nav-actions {
-        width: 100%;
-        justify-content: flex-start;
-        gap: 12px;
-        flex-wrap: wrap;
-      }
-      .app-shell {
-        display: flex;
-        flex-direction: column;
-        min-height: unset;
-        gap: 28px;
-      }
-      main.content {
-        order: 1;
-        padding: 24px 20px 156px;
-      }
-      aside.sidebar {
-        order: 2;
-        border-right: none;
-        border-top: 1px solid rgba(255,255,255,0.08);
-        padding: 24px 20px 36px;
-        display: grid;
-        gap: 24px;
-        background: transparent;
-      }
-      .sidebar-section {
-        margin: 0;
-      }
-      .sidebar-section h3 {
-        font-size: 12px;
-        letter-spacing: 0.14em;
-        margin-bottom: 14px;
-      }
-      .sidebar-list {
-        display: grid;
-        gap: 16px;
-      }
-      .sidebar-item {
-        grid-template-columns: 48px 1fr auto;
-        padding: 12px 14px;
-        column-gap: 14px;
-        border: 1px solid rgba(255,255,255,0.05);
-        background: rgba(255,255,255,0.03);
-        border-radius: 12px;
-      }
-      .sidebar-item .viewers {
-        justify-self: end;
-      }
-      .carousel-window {
-        padding: 24px 16px 34px;
-      }
-      .slide {
-        flex: 0 0 50%;
-      }
-      .carousel-nav {
-        padding: 0 16px;
-      }
-      .carousel-nav button {
-        width: 42px;
-        height: 42px;
-        margin: 0 10px;
-      }
-      .live-card .body {
-        padding: 16px 18px 22px;
-      }
-      .chat-widget {
-        bottom: calc(132px + 18px);
-        right: 18px;
-      }
-      .live-chat {
-        width: min(380px, calc(100vw - 40px));
-      }
-      .community-bar {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 18px;
-        padding: 20px 24px;
-      }
-      .community-bar .copy {
-        flex: none;
-        max-width: none;
-      }
-    }
-
-    @media (max-width: 640px) {
-      body {
-        padding: 24px 16px 72px;
-        background: radial-gradient(circle at 20% -10%, rgba(169,112,255,0.18), transparent 55%), var(--bg);
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: flex-start;
-        gap: 24px;
-        min-height: 100vh;
-      }
-      header.top-nav { display: none !important; }
-      .app-shell { display: none !important; }
-      .community-bar { display: none !important; }
-      .chat-widget { display: none !important; }
-      .mobile-flappy {
-        display: grid;
-        justify-items: center;
-        gap: 20px;
-        width: 100%;
-      }
-      .flappy-card {
-        width: min(360px, 94%);
-      }
-      .flappy-stage {
-        width: 100%;
-      }
-    }
-
-    @media (max-width: 480px) {
-      body {
-        padding: 20px 12px 60px;
-      }
-      .flappy-card {
-        width: min(320px, 96%);
-        padding: 18px 16px 20px;
-      }
-      .flappy-score {
-        font-size: 22px;
-      }
-      .flappy-instruction {
-        font-size: 11px;
-      }
-    }
-
   </style>
 </head>
 <body>
+  <section class="mobile-fun" aria-labelledby="mobile-fun-title" aria-live="polite">
+    <div class="mobile-fun-card">
+      <div class="mobile-fun-logo">
+        <img src="logo.png" alt="TIRED logo" />
+      </div>
+      <p class="mobile-fun-eyebrow">TIRED MOBILE LAB</p>
+      <h1 class="mobile-fun-title" id="mobile-fun-title">Memes nap. Raiders plot.</h1>
+      <p class="mobile-fun-quote" data-mobile-quote>Tap the button and we’ll whisper a fresh rally cry.</p>
+      <ul class="mobile-fun-pulse">
+        <li>Lock the phone, not the grind.</li>
+        <li>Swipe fatigue? Send memes instead.</li>
+        <li>Need a mission? We’ve got ammo.</li>
+      </ul>
+      <div class="mobile-fun-actions">
+        <button class="mobile-fun-button" type="button" data-mobile-refresh>Shuffle mantra</button>
+        <button class="mobile-fun-ghost" type="button" data-mobile-ping>Drop raid idea</button>
+        <a class="mobile-fun-link" href="https://x.com/Tired_Coin_Sol" target="_blank" rel="noopener">Open Raid HQ</a>
+      </div>
+      <ul class="mobile-fun-feed" data-mobile-feed>
+        <li>🚨 Raid intel queued. Desktop squad is stretching.</li>
+      </ul>
+      <p class="mobile-fun-footer">TIRED MOBILE MODE · MEMES NEVER SLEEP</p>
+    </div>
+  </section>
   <header class="top-nav">
     <div class="nav-left">
       <div class="logo">
@@ -2122,108 +2021,79 @@
     <aside class="sidebar">
       <div class="sidebar-section">
         <h3>FOLLOWED CHANNELS</h3>
-        <div class="sidebar-list">
-          <a href="https://x.com/a1lon9" class="sidebar-item" target="_blank" rel="noopener">
-            <img class="avatar" src="alon.jpg" alt="Alon profile" />
-            <div class="meta">
-              <span>Alon</span>
-              <span>pump.fun</span>
-            </div>
-            <div class="viewers">
-              <span class="live-dot"></span>
-              <span>24.5K</span>
-            </div>
-          </a>
-          <a href="https://x.com/okpasquale" class="sidebar-item" target="_blank" rel="noopener">
-            <img class="avatar" src="pasq.jpg" alt="Pasquale D'Silva profile" />
-            <div class="meta">
-              <span>Pasquale D'Silva</span>
-              <span>Just Chatting</span>
-            </div>
-            <div class="viewers">
-              <span class="live-dot"></span>
-              <span>12.1K</span>
-            </div>
-          </a>
-          <a href="https://x.com/SolportTom" class="sidebar-item" target="_blank" rel="noopener">
-            <img class="avatar" src="tom.jpg" alt="Tom profile" />
-            <div class="meta">
-              <span>Tom</span>
-              <span>Retro</span>
-            </div>
-            <div class="viewers">
-              <span class="live-dot"></span>
-              <span>3.2K</span>
-            </div>
-          </a>
-        </div>
+        <a href="https://x.com/a1lon9" class="sidebar-item" target="_blank" rel="noopener">
+          <img class="avatar" src="alon.jpg" alt="Alon profile" />
+          <div class="meta">
+            <span>Alon</span>
+            <span>pump.fun</span>
+          </div>
+          <div class="viewers">
+            <span class="live-dot"></span>
+            <span>24.5K</span>
+          </div>
+        </a>
+        <a href="https://x.com/okpasquale" class="sidebar-item" target="_blank" rel="noopener">
+          <img class="avatar" src="pasq.jpg" alt="Pasquale D'Silva profile" />
+          <div class="meta">
+            <span>Pasquale D'Silva</span>
+            <span>Just Chatting</span>
+          </div>
+          <div class="viewers">
+            <span class="live-dot"></span>
+            <span>12.1K</span>
+          </div>
+        </a>
+        <a href="https://x.com/SolportTom" class="sidebar-item" target="_blank" rel="noopener">
+          <img class="avatar" src="tom.jpg" alt="Tom profile" />
+          <div class="meta">
+            <span>Tom</span>
+            <span>Retro</span>
+          </div>
+          <div class="viewers">
+            <span class="live-dot"></span>
+            <span>3.2K</span>
+          </div>
+        </a>
       </div>
       <div class="sidebar-section">
         <h3>RECOMMENDED COINS</h3>
-        <div class="sidebar-list">
-          <a href="#" class="sidebar-item">
-            <img class="avatar" src="logo.png" alt="TIRED emblem" />
-            <div class="meta">
-              <span>TIRED</span>
-              <span>MOVEMENT LOADING...</span>
-            </div>
-            <div class="viewers">
-              <span class="live-dot"></span>
-              <span>2M</span>
-            </div>
-          </a>
-          <a href="https://dexscreener.com/solana/2h87wihp7gmcbgodhrtzgmvc3myqex1xpcgdovuhnqhj" class="sidebar-item">
-            <img class="avatar" src="dollo.jpg" alt="Dollo profile" />
-            <div class="meta">
-              <span>DOLLO</span>
-              <span>DOLLO ALL IN</span>
-            </div>
-            <div class="viewers">
-              <span class="live-dot"></span>
-              <span>54K</span>
-            </div>
-          </a>
-          <a href="https://dexscreener.com/solana/9javupvlt6rvyzsgk78w1wpjq1i8rbu8us1s7brfbrxn" class="sidebar-item">
-            <img class="avatar" src="detect.jpg" alt="Detective profile" />
-            <div class="meta">
-              <span>DETECTIVE</span>
-              <span>Just can't prove it</span>
-            </div>
-            <div class="viewers">
-              <span class="live-dot"></span>
-              <span>9.8K</span>
-            </div>
-          </a>
-        </div>
+        <a href="#" class="sidebar-item">
+          <img class="avatar" src="logo.png" alt="TIRED emblem" />
+          <div class="meta">
+            <span>TIRED</span>
+            <span>MOVEMENT LOADING...</span>
+          </div>
+          <div class="viewers">
+            <span class="live-dot"></span>
+            <span>2M</span>
+          </div>
+        </a>
+        <a href="https://dexscreener.com/solana/2h87wihp7gmcbgodhrtzgmvc3myqex1xpcgdovuhnqhj" class="sidebar-item">
+          <img class="avatar" src="dollo.jpg" alt="Dollo profile" />
+          <div class="meta">
+            <span>DOLLO</span>
+            <span>DOLLO ALL IN</span>
+          </div>
+          <div class="viewers">
+            <span class="live-dot"></span>
+            <span>54K</span>
+          </div>
+        </a>
+        <a href="https://dexscreener.com/solana/9javupvlt6rvyzsgk78w1wpjq1i8rbu8us1s7brfbrxn" class="sidebar-item">
+          <img class="avatar" src="detect.jpg" alt="Detective profile" />
+          <div class="meta">
+            <span>DETECTIVE</span>
+            <span>Just can't prove it</span>
+          </div>
+          <div class="viewers">
+            <span class="live-dot"></span>
+            <span>9.8K</span>
+          </div>
+        </a>
       </div>
     </aside>
     <main class="content">
-    
-  <div class="mobile-flappy-wrapper">
-    <section class="mobile-flappy" aria-label="TIRED flappy grind">
-      <div class="flappy-card">
-        <h2 class="flappy-title">TIRED FLAPPY</h2>
-        <div class="flappy-stage">
-          <canvas width="320" height="420" aria-label="TIRED flappy canvas"></canvas>
-        </div>
-        <div class="flappy-meta">
-          <span class="flappy-score-label">Score</span>
-          <span class="flappy-score">0</span>
-          <span class="flappy-instruction">Tap to flap.</span>
-          <span class="flappy-callout">OPEN DESKTOP MF.</span>
-        </div>
-      </div>
-    </section>
-  </div>
-
-
-    
-    
-    
-    
-    
       <section class="hero-carousel" aria-label="Featured live channels">
-
         <div class="carousel-window">
           <div class="carousel-track">
             <article class="slide">
@@ -2566,6 +2436,7 @@
       </form>
     </section>
   </div>
+
   <section class="community-bar">
     <div class="copy">
       <h2>Join the TIRED Community.</h2>
@@ -2897,6 +2768,201 @@
       });
     });
 
+    const chatWidget = document.querySelector('.chat-widget');
+    const chatPanel = chatWidget?.querySelector('.live-chat');
+    const chatLauncher = chatWidget?.querySelector('.chat-launcher');
+    const chatForm = chatWidget?.querySelector('.chat-form');
+    const chatInput = chatWidget?.querySelector('#chat-input');
+    const chatLog = chatWidget?.querySelector('.chat-log');
+    const chatReplies = [
+      'You’re TIRED now. Meme output > stream watchtime.',
+      'Raid squad says thanks. Did you ping @Tired_Coin_Sol already?',
+      'Every meme you drop makes a streamer cry. Keep going.',
+      'Bag check: TIRED holders are the new winners circle.',
+      'Reminder: Streams are for spectators. Memes are for traders.'
+    ];
+    let chatReplyIndex = 0;
+
+    const setChatOpen = (open) => {
+      if (!chatPanel || !chatLauncher) return;
+      const nextState = Boolean(open);
+      if (nextState) {
+        chatPanel.hidden = false;
+        requestAnimationFrame(() => chatPanel.classList.add('open'));
+      } else {
+        chatPanel.classList.remove('open');
+        window.setTimeout(() => {
+          chatPanel.hidden = true;
+        }, 220);
+      }
+      chatLauncher.setAttribute('aria-expanded', nextState ? 'true' : 'false');
+      if (nextState) {
+        window.setTimeout(() => chatInput?.focus(), 60);
+      }
+    };
+
+    chatLauncher?.addEventListener('click', () => {
+      const expanded = chatLauncher.getAttribute('aria-expanded') === 'true';
+      setChatOpen(!expanded);
+    });
+
+    const appendChatMessage = (text, type) => {
+      if (!chatLog) return;
+      const li = document.createElement('li');
+      li.className = 'chat-message ' + type;
+
+      const bubble = document.createElement('div');
+      bubble.className = 'chat-bubble';
+      const header = document.createElement('div');
+      header.className = 'bubble-header';
+      const label = document.createElement('span');
+      label.textContent = type === 'user' ? 'YOU' : 'TIRED BOT';
+      if (type === 'bot') {
+        const avatar = document.createElement('div');
+        avatar.className = 'chat-avatar bot';
+        const img = document.createElement('img');
+        img.src = 'logo.png';
+        img.alt = 'TIRED bot';
+        avatar.append(img);
+        header.append(avatar, label);
+      } else {
+        header.append(label);
+      }
+      const message = document.createElement('p');
+      message.textContent = text;
+      bubble.append(header, message);
+      li.append(bubble);
+
+      chatLog.appendChild(li);
+      const chatWindow = chatLog.parentElement;
+      if (chatWindow) {
+        chatWindow.scrollTop = chatWindow.scrollHeight;
+      }
+    };
+
+    chatForm?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      const value = chatInput?.value.trim();
+      if (!value) return;
+      setChatOpen(true);
+      appendChatMessage(value, 'user');
+      if (chatInput) chatInput.value = '';
+      const reply = chatReplies[chatReplyIndex];
+      chatReplyIndex = (chatReplyIndex + 1) % chatReplies.length;
+      window.setTimeout(() => appendChatMessage(reply, 'bot'), 350);
+    });
+
+    document.addEventListener('click', (event) => {
+      if (chatWidget && !chatWidget.contains(event.target)) {
+        setChatOpen(false);
+      }
+    });
+
+    const mobileFun = document.querySelector('.mobile-fun');
+    if (mobileFun) {
+      const quoteEl = mobileFun.querySelector('[data-mobile-quote]');
+      const refreshBtn = mobileFun.querySelector('[data-mobile-refresh]');
+      const feedEl = mobileFun.querySelector('[data-mobile-feed]');
+      const pingBtn = mobileFun.querySelector('[data-mobile-ping]');
+      const quotes = [
+        'Raid checklist: caffeine, memes, and a desktop screen.',
+        'TIRED alpha: Streams snooze. Timelines flip green.',
+        'Tap in, tag frens, torch the algo. Repeat.',
+        'Mobile is warm-up mode — the real grind waits at the desk.',
+        'Your thumbs called. They want to copy-paste the next raid script.'
+      ];
+      const drops = [
+        '📡 HQ pinged holders. Expect reinforcements.',
+        '🔥 Meme furnace online. Uploading chaos.',
+        '🚀 Floor support incoming. Someone brewed fresh copium.',
+        '🎯 Target located. Tag @Tired_Coin_Sol and engage.',
+        '🛡️ Shield your bags. Trolls detected on the feed.'
+      ];
+      const mobileQuery = window.matchMedia('(max-width: 640px)');
+      let quoteIndex = Math.floor(Math.random() * quotes.length);
+      let quoteTimer = null;
+      let dropTimer = null;
+
+      const applyQuote = (text) => {
+        if (!quoteEl) return;
+        quoteEl.classList.remove('is-changing');
+        void quoteEl.offsetWidth;
+        quoteEl.textContent = text;
+        quoteEl.classList.add('is-changing');
+      };
+
+      const rotateQuote = () => {
+        quoteIndex = (quoteIndex + 1) % quotes.length;
+        applyQuote(quotes[quoteIndex]);
+      };
+
+      const startQuoteLoop = () => {
+        if (quoteTimer || !mobileQuery.matches) return;
+        quoteTimer = window.setInterval(rotateQuote, 5600);
+      };
+
+      const stopQuoteLoop = () => {
+        if (!quoteTimer) return;
+        clearInterval(quoteTimer);
+        quoteTimer = null;
+      };
+
+      const pushDrop = () => {
+        if (!feedEl) return;
+        const li = document.createElement('li');
+        li.textContent = drops[Math.floor(Math.random() * drops.length)];
+        feedEl.appendChild(li);
+        while (feedEl.children.length > 4) {
+          feedEl.removeChild(feedEl.firstElementChild);
+        }
+      };
+
+      const startDropLoop = () => {
+        if (dropTimer || !mobileQuery.matches) return;
+        dropTimer = window.setInterval(pushDrop, 8200);
+      };
+
+      const stopDropLoop = () => {
+        if (!dropTimer) return;
+        clearInterval(dropTimer);
+        dropTimer = null;
+      };
+
+      const handleMobileChange = () => {
+        if (mobileQuery.matches) {
+          startQuoteLoop();
+          startDropLoop();
+        } else {
+          stopQuoteLoop();
+          stopDropLoop();
+        }
+      };
+
+      refreshBtn?.addEventListener('click', () => {
+        rotateQuote();
+        pushDrop();
+      });
+
+      pingBtn?.addEventListener('click', () => {
+        pushDrop();
+      });
+
+      applyQuote(quotes[quoteIndex]);
+      pushDrop();
+      handleMobileChange();
+
+      if (mobileQuery.addEventListener) {
+        mobileQuery.addEventListener('change', handleMobileChange);
+      } else if (mobileQuery.addListener) {
+        mobileQuery.addListener(handleMobileChange);
+      }
+
+      window.addEventListener('pagehide', () => {
+        stopQuoteLoop();
+        stopDropLoop();
+      });
+    }
+
     const profileTrigger = document.querySelector('.profile-trigger');
     const profileModal = document.querySelector('.profile-modal');
     const profileClose = profileModal?.querySelector('.profile-close');
@@ -2967,7 +3033,6 @@
         setProfileModalOpen(false);
         setCrownPanelOpen(false);
         setStreamOverlayOpen(false);
-        setChatOpen(false);
         if (memeToast) {
           clearTimeout(memeToastTimer);
           memeToast.classList.remove('visible');
@@ -3028,321 +3093,8 @@
         setCrownPanelOpen(false);
       }
     });
-
-    document.addEventListener('click', (event) => {
-      if (chatWidget && !chatWidget.contains(event.target)) {
-        setChatOpen(false);
-      }
-    });
-
-    const chatWidget = document.querySelector('.chat-widget');
-    const chatPanel = chatWidget?.querySelector('.live-chat');
-    const chatLauncher = chatWidget?.querySelector('.chat-launcher');
-    const chatForm = chatWidget?.querySelector('.chat-form');
-    const chatInput = chatWidget?.querySelector('#chat-input');
-    const chatLog = chatWidget?.querySelector('.chat-log');
-    const chatReplies = [
-      'You’re TIRED now. Meme output > stream watchtime.',
-      'Raid squad says thanks. Did you ping @Tired_Coin_Sol already?',
-      'Every meme you drop makes a streamer cry. Keep going.',
-      'Bag check: TIRED holders are the new winners circle.',
-      'Reminder: Streams are for spectators. Memes are for traders.'
-    ];
-    let chatReplyIndex = 0;
-
-    const setChatOpen = (open) => {
-      if (!chatPanel || !chatLauncher) return;
-      const nextState = Boolean(open);
-      if (nextState) {
-        chatPanel.hidden = false;
-        requestAnimationFrame(() => chatPanel.classList.add('open'));
-      } else {
-        chatPanel.classList.remove('open');
-        window.setTimeout(() => {
-          chatPanel.hidden = true;
-        }, 220);
-      }
-      chatLauncher.setAttribute('aria-expanded', nextState ? 'true' : 'false');
-      if (nextState) {
-        window.setTimeout(() => chatInput?.focus(), 60);
-      }
-    };
-
-    chatLauncher?.addEventListener('click', () => {
-      const expanded = chatLauncher.getAttribute('aria-expanded') === 'true';
-      setChatOpen(!expanded);
-    });
-
-    const appendChatMessage = (text, type) => {
-      if (!chatLog) return;
-      const li = document.createElement('li');
-      li.className = `chat-message ${type}`;
-
-      const bubble = document.createElement('div');
-      bubble.className = 'chat-bubble';
-      const header = document.createElement('div');
-      header.className = 'bubble-header';
-      const label = document.createElement('span');
-      label.textContent = type === 'user' ? 'YOU' : 'TIRED BOT';
-      if (type === 'bot') {
-        const avatar = document.createElement('div');
-        avatar.className = 'chat-avatar bot';
-        const img = document.createElement('img');
-        img.src = 'logo.png';
-        img.alt = 'TIRED bot';
-        avatar.append(img);
-        header.append(avatar, label);
-      } else {
-        header.append(label);
-      }
-      const message = document.createElement('p');
-      message.textContent = text;
-      bubble.append(header, message);
-      li.append(bubble);
-
-      chatLog.appendChild(li);
-      const chatWindow = chatLog.parentElement;
-      if (chatWindow) {
-        chatWindow.scrollTop = chatWindow.scrollHeight;
-      }
-    };
-
-    chatForm?.addEventListener('submit', (event) => {
-      event.preventDefault();
-      const value = chatInput?.value.trim();
-      if (!value) return;
-      setChatOpen(true);
-      appendChatMessage(value, 'user');
-      if (chatInput) chatInput.value = '';
-      const reply = chatReplies[chatReplyIndex];
-      chatReplyIndex = (chatReplyIndex + 1) % chatReplies.length;
-      window.setTimeout(() => appendChatMessage(reply, 'bot'), 350);
-    });
-
-    const flappyStage = document.querySelector('.mobile-flappy .flappy-stage');
-    if (flappyStage) {
-      const mobileQuery = window.matchMedia('(max-width: 640px)');
-      const canvas = flappyStage.querySelector('canvas');
-      if (!canvas) return;
-      const card = flappyStage.closest('.flappy-card');
-      const scoreEl = card?.querySelector('.flappy-score');
-      const instructionEl = card?.querySelector('.flappy-instruction');
-      const calloutEl = card?.querySelector('.flappy-callout');
-      const ctx = canvas.getContext('2d');
-      const WIDTH = canvas.width;
-      const HEIGHT = canvas.height;
-      const FLOOR = HEIGHT - 32;
-      const primaryValue = (getComputedStyle(document.documentElement).getPropertyValue('--primary') || '#a970ff').trim() || '#a970ff';
-      const birdImg = new Image();
-      let birdReady = false;
-      birdImg.src = 'logo.png';
-      birdImg.onload = () => { birdReady = true; };
-
-      let animationFrame;
-      let bird;
-      let pipes;
-      let frame;
-      let score;
-      let started;
-      let gameOver;
-
-      const gravity = 0.28;
-      const jumpVelocity = -5.1;
-      const pipeGap = 120;
-      const pipeWidth = 48;
-      const pipeInterval = 90;
-      const pipeSpeed = 2.2;
-
-      const resetGame = () => {
-        bird = { x: WIDTH * 0.25, y: HEIGHT * 0.5, vy: 0, size: 16 };
-        pipes = [];
-        frame = 0;
-        score = 0;
-        started = false;
-        gameOver = false;
-        if (scoreEl) scoreEl.textContent = '0';
-        if (instructionEl) instructionEl.textContent = 'Tap to flap.';
-        if (calloutEl) calloutEl.textContent = 'OPEN DESKTOP MF.';
-      };
-
-      const spawnPipe = (startX = WIDTH) => {
-        const minTop = 40;
-        const maxTop = HEIGHT - pipeGap - 80;
-        const top = Math.random() * (maxTop - minTop) + minTop;
-        pipes.push({ x: startX, top, passed: false });
-      };
-
-      const setGameOver = () => {
-        if (gameOver) return;
-        gameOver = true;
-        if (instructionEl) instructionEl.textContent = 'Bonked. Tap to restart.';
-      };
-
-      const flap = () => {
-        if (gameOver) {
-          resetGame();
-          spawnPipe(WIDTH * 0.8);
-          spawnPipe(WIDTH + 160);
-          return;
-        }
-        started = true;
-        bird.vy = jumpVelocity;
-        if (instructionEl) instructionEl.textContent = 'Keep tapping.';
-      };
-
-      const handleInput = (event) => {
-        if (!mobileQuery.matches) return;
-        event?.preventDefault?.();
-        flap();
-      };
-
-      canvas.addEventListener('pointerdown', handleInput);
-      canvas.addEventListener('touchstart', handleInput, { passive: true });
-      document.addEventListener('keydown', (event) => {
-        if (event.code === 'Space') {
-          if (mobileQuery.matches) {
-            event.preventDefault();
-            handleInput(event);
-          }
-        }
-      });
-
-      const drawBird = () => {
-        ctx.save();
-        ctx.translate(bird.x, bird.y);
-        ctx.rotate(Math.min(bird.vy / 6, 0.5));
-        if (birdReady) {
-          const size = bird.size * 2.2;
-          ctx.drawImage(birdImg, -size / 2, -size / 2, size, size);
-        } else {
-          ctx.fillStyle = primaryValue;
-          ctx.beginPath();
-          ctx.arc(0, 0, bird.size, 0, Math.PI * 2);
-          ctx.fill();
-        }
-        ctx.restore();
-      };
-
-      const drawPipes = () => {
-        ctx.fillStyle = primaryValue;
-        pipes.forEach((pipe) => {
-          ctx.fillRect(pipe.x, 0, pipeWidth, pipe.top);
-          ctx.fillRect(pipe.x, pipe.top + pipeGap, pipeWidth, HEIGHT);
-        });
-      };
-
-      const update = () => {
-        frame += 1;
-        ctx.fillStyle = '#09090f';
-        ctx.fillRect(0, 0, WIDTH, HEIGHT);
-
-        if (!started) {
-          bird.y += Math.sin(frame / 14) * 0.6;
-        } else if (!gameOver) {
-          bird.vy += gravity;
-          bird.y += bird.vy;
-          if (frame % pipeInterval === 0) spawnPipe();
-        }
-
-        pipes.forEach((pipe) => {
-          const activeSpeed = (started && !gameOver) ? pipeSpeed : pipeSpeed * 0.35;
-          pipe.x -= activeSpeed;
-
-          if (started && !gameOver) {
-            if (!pipe.passed && pipe.x + pipeWidth < bird.x - bird.size) {
-              pipe.passed = true;
-              score += 1;
-              if (scoreEl) scoreEl.textContent = String(score);
-            }
-            if (pipe.x < bird.x + bird.size && pipe.x + pipeWidth > bird.x - bird.size) {
-              if (bird.y - bird.size < pipe.top || bird.y + bird.size > pipe.top + pipeGap) {
-                setGameOver();
-              }
-            }
-            if (pipe.x + pipeWidth < -60) {
-              pipe.x = WIDTH + 120;
-              const minTop = 40;
-              const maxTop = HEIGHT - pipeGap - 80;
-              pipe.top = Math.random() * (maxTop - minTop) + minTop;
-              pipe.passed = false;
-            }
-          } else {
-            if (pipe.x + pipeWidth < -20) {
-              pipe.x = WIDTH + 160;
-              const minTop = 60;
-              const maxTop = HEIGHT - pipeGap - 80;
-              pipe.top = Math.random() * (maxTop - minTop) + minTop;
-              pipe.passed = false;
-            }
-          }
-        });
-
-        if (started && !gameOver) {
-          pipes = pipes.filter((pipe) => pipe.x + pipeWidth > -120);
-        }
-
-        drawPipes();
-        drawBird();
-
-        ctx.fillStyle = 'rgba(255,255,255,0.05)';
-        ctx.fillRect(0, FLOOR, WIDTH, HEIGHT - FLOOR);
-        ctx.fillStyle = 'rgba(255,255,255,0.2)';
-        ctx.fillRect(0, FLOOR, WIDTH, 2);
-
-        if (bird.y + bird.size >= FLOOR) {
-          bird.y = FLOOR - bird.size;
-          setGameOver();
-        } else if (bird.y - bird.size <= 0) {
-          bird.y = bird.size;
-          setGameOver();
-        }
-      };
-
-      const step = () => {
-        update();
-        animationFrame = window.requestAnimationFrame(step);
-      };
-
-      const startLoop = () => {
-        if (animationFrame) {
-          window.cancelAnimationFrame(animationFrame);
-        }
-        animationFrame = window.requestAnimationFrame(step);
-      };
-
-      const startGame = () => {
-        resetGame();
-        spawnPipe(WIDTH * 0.8);
-        spawnPipe(WIDTH + 160);
-        startLoop();
-      };
-
-      const stopGame = () => {
-        if (animationFrame) {
-          window.cancelAnimationFrame(animationFrame);
-          animationFrame = null;
-        }
-      };
-
-      const syncGame = () => {
-        if (mobileQuery.matches) {
-          startGame();
-        } else {
-          stopGame();
-          resetGame();
-        }
-      };
-
-      if (mobileQuery.addEventListener) {
-        mobileQuery.addEventListener('change', syncGame);
-      } else if (mobileQuery.addListener) {
-        mobileQuery.addListener(syncGame);
-      }
-
-      syncGame();
-    }  </script>
+  </script>
   <script>
-
     (() => {
       const hero = document.querySelector('.hero-carousel');
       if (!hero) return;
@@ -3350,68 +3102,34 @@
       const slides = Array.from(track.children);
       const prev = hero.querySelector('.carousel-nav .prev');
       const next = hero.querySelector('.carousel-nav .next');
-      const interval = 6000;
+      const slidesPerPage = 4;
+      const pageCount = Math.max(1, Math.ceil(slides.length / slidesPerPage));
+      let current = 0;
       let timer;
-      let slidesPerPage = 4;
-      let pageCount = 1;
-      let currentPage = 0;
+      const interval = 6000;
 
-      const getSlidesPerPage = () => {
-        if (window.matchMedia('(max-width: 640px)').matches) return 1;
-        if (window.matchMedia('(max-width: 960px)').matches) return 2;
-        if (window.matchMedia('(max-width: 1200px)').matches) return 3;
-        return 4;
-      };
-
-      const applyTransform = () => {
-        track.style.transform = `translateX(-${currentPage * 100}%)`;
-      };
-
-      function stop() {
+      const stop = () => {
         if (timer) {
           clearInterval(timer);
           timer = null;
         }
-      }
+      };
 
-      function restart() {
+      const restart = () => {
         stop();
         if (pageCount <= 1) return;
-        timer = window.setInterval(() => setSlide(currentPage + 1, false), interval);
-      }
+        timer = setInterval(() => setSlide(current + 1, false), interval);
+      };
 
-      function setSlide(index, allowRestart = true) {
+      const setSlide = (index, allowRestart = true) => {
         if (pageCount === 0) return;
-        currentPage = (index + pageCount) % pageCount;
-        applyTransform();
+        current = (index + pageCount) % pageCount;
+        track.style.transform = `translateX(-${current * 100}%)`;
         if (allowRestart) restart();
-      }
+      };
 
-      function recalc(force = false) {
-        const firstVisibleIndex = currentPage * slidesPerPage;
-        const nextSlidesPerPage = getSlidesPerPage();
-        if (!force && nextSlidesPerPage === slidesPerPage) {
-          pageCount = Math.max(1, Math.ceil(slides.length / slidesPerPage));
-          currentPage = Math.min(currentPage, pageCount - 1);
-          const disableNav = pageCount <= 1;
-          prev?.toggleAttribute('disabled', disableNav);
-          next?.toggleAttribute('disabled', disableNav);
-          applyTransform();
-          restart();
-          return;
-        }
-        slidesPerPage = nextSlidesPerPage;
-        pageCount = Math.max(1, Math.ceil(slides.length / slidesPerPage));
-        currentPage = Math.max(0, Math.min(Math.floor(firstVisibleIndex / slidesPerPage), pageCount - 1));
-        const disableNav = pageCount <= 1;
-        prev?.toggleAttribute('disabled', disableNav);
-        next?.toggleAttribute('disabled', disableNav);
-        applyTransform();
-        restart();
-      }
-
-      next?.addEventListener('click', () => setSlide(currentPage + 1));
-      prev?.addEventListener('click', () => setSlide(currentPage - 1));
+      next?.addEventListener('click', () => setSlide(current + 1));
+      prev?.addEventListener('click', () => setSlide(current - 1));
 
       hero.addEventListener('pointerenter', stop);
       hero.addEventListener('pointerleave', restart);
@@ -3422,9 +3140,8 @@
         }
       });
 
-      window.addEventListener('resize', () => recalc());
-
-      recalc(true);
+      setSlide(0, false);
+      restart();
     })();
   </script>
 </body>
